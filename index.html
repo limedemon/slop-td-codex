@@ -74,7 +74,16 @@ nav.tabs a:hover{color:var(--ink); background:var(--surface-2)}
 nav.tabs a.on{color:var(--accent); background:var(--accent-soft)}
 nav.tabs a .n{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:400;
   color:var(--muted); margin-left:6px}
-.langswitch{margin-left:auto; display:flex; gap:2px; padding:2px; border-radius:999px;
+.updated{margin-left:auto; display:flex; align-items:center; gap:7px; padding:5px 11px;
+  border-radius:999px; border:1px solid var(--line); background:var(--surface);
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; color:var(--muted);
+  white-space:nowrap}
+.updated .dot{width:7px; height:7px; border-radius:50%; background:var(--t-start); flex:none;
+  box-shadow:0 0 0 0 var(--t-start); animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,143,78,.5)} 70%{box-shadow:0 0 0 7px rgba(47,143,78,0)}
+  100%{box-shadow:0 0 0 0 rgba(47,143,78,0)}}
+.updated b{color:var(--ink-2); font-weight:600}
+.langswitch{margin-left:10px; display:flex; gap:2px; padding:2px; border-radius:999px;
   border:1px solid var(--line); background:var(--surface)}
 .langswitch button{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
   font-weight:600; letter-spacing:.08em; padding:5px 11px; border:0; border-radius:999px;
@@ -202,7 +211,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
 @media (max-width:520px){
   .drop{grid-template-columns:3px 1fr; row-gap:2px}
   .dnum{grid-column:2; text-align:left; display:flex; gap:10px; align-items:baseline}
-  .langswitch{margin-left:0}
+  .langswitch, .updated{margin-left:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
 </style>
@@ -219,6 +228,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
     <a href="#/units" data-v="units"><span class="lbl"></span><span class="n" id="n-units"></span></a>
     <a href="#/crates" data-v="crates"><span class="lbl"></span><span class="n" id="n-crates"></span></a>
     <a href="#/modes" data-v="modes"><span class="lbl"></span><span class="n" id="n-modes"></span></a>
+    <div class="updated" id="updated" title=""></div>
     <div class="langswitch" id="langswitch">
       <button type="button" data-lang="ru">RU</button>
       <button type="button" data-lang="en">EN</button>
@@ -277,7 +287,9 @@ const I18N = {
     modesNote: "Награда за пройденную катку. В эндлесах показан набор, который выдаётся за пройденный отрезок волн.",
     secFarm: "Где что фармить", thCurrency: "Награда", thSources: "Откуда падает",
     thBest: "Лучшее место", thAmount: "За катку", sourcesN: n => n + " реж.",
-    allRewards: "Все награды", tagBest: "лучшая",
+    allRewards: "Все награды", tagBest: "лучшая", onlyWith: "только с этой наградой",
+    updated: "обновлено", today: "сегодня", yesterday: "вчера",
+    daysAgo: n => n + " дн. назад",
     farmNote: "Опыт устроен наоборот: короткие кухонные карты дают его больше, чем дорогие. Level 3 отдаёт 25 опыта при 65 монетах, а Doomspire — 13 при 1500. Кости, шестерни и солнца выпадают ровно из одного режима каждая.",
     secNormal: "Обычные карты", secEndless: "Эндлес",
     normalNote: n => n + " карт, отсортированы по награде в монетах.",
@@ -329,7 +341,9 @@ const I18N = {
     modesNote: "Reward for clearing a match. For endless modes this is the set paid out for a cleared stretch of waves.",
     secFarm: "Where to farm what", thCurrency: "Reward", thSources: "Comes from",
     thBest: "Best map", thAmount: "Per match", sourcesN: n => n + " modes",
-    allRewards: "All rewards", tagBest: "best",
+    allRewards: "All rewards", tagBest: "best", onlyWith: "only maps that pay it",
+    updated: "updated", today: "today", yesterday: "yesterday",
+    daysAgo: n => n + " days ago",
     farmNote: "XP works the other way round: the short kitchen maps pay more of it than the expensive ones. Level 3 hands out 25 XP next to 65 coins, while Doomspire gives 13 next to 1500. Bones, cogs and suns each come from exactly one mode.",
     secNormal: "Regular maps", secEndless: "Endless",
     normalNote: n => n + " maps, sorted by the coin reward.",
@@ -354,6 +368,8 @@ const CASH = '<svg class="cash" viewBox="0 0 24 18" aria-hidden="true" focusable
   + '<rect x="9.5" y="10.9" width="1.5" height="2.4" rx=".7" fill="var(--money-dot)" opacity=".5"/>'
   + '<rect x="19.6" y="10.9" width="1.5" height="2.4" rx=".7" fill="var(--money-dot)" opacity=".5"/>'
   + '</svg>';
+
+const BUILD_TS = "2026-09-12T09:36:59+05:00";
 
 let LANG = "ru";
 try { const s = localStorage.getItem("slopcodex-lang"); if(s === "ru" || s === "en") LANG = s; } catch(e){}
@@ -604,7 +620,8 @@ function pityPanels(){
 
 /* ========== КАТКИ ========== */
 const CUR_ORDER = ["Cash", "Gems", "Stars", "Chi", "Sheckles", "Bones", "Cogs", "Suns"];
-const mState = { cur: "" };
+const mState = { cur: "", only: false };
+const amountOf = (m, c) => { const x = m.currencies.find(y => y.raw === c); return x ? x.amount : 0; };
 
 // Сводка по каждой награде: сколько режимов её дают и где её больше всего.
 function farmRows(){
@@ -617,7 +634,7 @@ function farmRows(){
 }
 
 function farmPanel(){
-  return '<div class="panel" style="margin-top:0"><h3>' + T.secFarm + "</h3>"
+  return '<div class="panel" style="margin-top:0">'
     + '<div class="tablewrap"><table><thead><tr><th>' + T.thCurrency + '</th><th class="num">'
     + T.thSources + "</th><th>" + T.thBest + '</th><th class="num">' + T.thAmount
     + "</th></tr></thead><tbody>"
@@ -651,18 +668,21 @@ function modesView(){
     + '<button class="chip" data-c="" aria-pressed="' + (mState.cur === "") + '">' + T.allRewards + "</button>"
     + CUR_ORDER.map(c => '<button class="chip" data-c="' + c + '" aria-pressed="' + (mState.cur === c) + '">'
         + esc(cur(c)) + "</button>").join("")
+    + '<button class="chip" id="curonly" aria-pressed="' + mState.only + '">' + T.onlyWith + "</button>"
     + '</div></div><div id="modesBody"></div></div>';
 }
 
 function renderModes(){
   const hi = mState.cur;
-  let list = MODES;
+  let list = MODES.slice();
   if(hi){
-    list = MODES.filter(m => m.currencies.some(x => x.raw === hi)).slice().sort((a, b) =>
-      b.currencies.find(x => x.raw === hi).amount - a.currencies.find(x => x.raw === hi).amount);
+    // Сортируем ВСЕ карты по выбранной награде; режимы без неё уходят в хвост,
+    // а прячутся только если включён отдельный тумблер.
+    if(mState.only) list = list.filter(m => amountOf(m, hi) > 0);
+    list.sort((a, b) => (amountOf(b, hi) - amountOf(a, hi)) || a.name.localeCompare(b.name, "en"));
   }
   const normal = list.filter(m => !m.endless), endless = list.filter(m => m.endless);
-  const bestName = hi && list.length ? list[0].name : null;
+  const bestName = (hi && list.length && amountOf(list[0], hi) > 0) ? list[0].name : null;
   const block = (arr, title, note) => !arr.length ? "" :
     '<h2 class="sec">' + title + '</h2><p class="secnote">' + note + "</p>"
     + '<div class="grid modes">' + arr.map((m, i) => modeCard(m, i, hi, m.name === bestName)).join("") + "</div>";
@@ -675,9 +695,14 @@ function bindModes(){
   document.getElementById("curchips").addEventListener("click", e => {
     const b = e.target.closest(".chip");
     if(!b) return;
-    mState.cur = b.dataset.c;
-    document.querySelectorAll("#curchips .chip").forEach(x =>
-      x.setAttribute("aria-pressed", String(x.dataset.c === mState.cur)));
+    if(b.id === "curonly"){
+      mState.only = !mState.only;
+      b.setAttribute("aria-pressed", String(mState.only));
+    } else {
+      mState.cur = b.dataset.c;
+      document.querySelectorAll("#curchips .chip[data-c]").forEach(x =>
+        x.setAttribute("aria-pressed", String(x.dataset.c === mState.cur)));
+    }
     renderModes();
   });
 }
@@ -699,6 +724,18 @@ function chrome(){
   document.getElementById("n-modes").textContent = MODES.length;
   document.querySelectorAll("#langswitch button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.lang === LANG)));
+
+  const box = document.getElementById("updated");
+  const d = new Date(BUILD_TS);
+  if(isNaN(d)){ box.hidden = true; }
+  else {
+    const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+    const rel = days <= 0 ? T.today : (days === 1 ? T.yesterday : T.daysAgo(days));
+    box.innerHTML = '<span class="dot"></span>' + T.updated + " <b>"
+      + d.toLocaleDateString(T.locale, { day: "2-digit", month: "2-digit", year: "numeric" })
+      + "</b> · " + rel;
+    box.title = d.toLocaleString(T.locale);
+  }
 }
 
 function route(keepScroll){
