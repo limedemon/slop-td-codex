@@ -275,6 +275,10 @@ const I18N = {
     secPity: "Пити и модификаторы", pityOf: "Пити · ", pModifiers: "Модификаторы юнита",
     thRarity: "Редкость", thSummons: "Саммонов", thModifier: "Модификатор", thChance: "Шанс", thEffect: "Эффект",
     modesNote: "Награда за пройденную катку. В эндлесах показан набор, который выдаётся за пройденный отрезок волн.",
+    secFarm: "Где что фармить", thCurrency: "Награда", thSources: "Откуда падает",
+    thBest: "Лучшее место", thAmount: "За катку", sourcesN: n => n + " реж.",
+    allRewards: "Все награды", tagBest: "лучшая",
+    farmNote: "Опыт устроен наоборот: короткие кухонные карты дают его больше, чем дорогие. Level 3 отдаёт 25 опыта при 65 монетах, а Doomspire — 13 при 1500. Кости, шестерни и солнца выпадают ровно из одного режима каждая.",
     secNormal: "Обычные карты", secEndless: "Эндлес",
     normalNote: n => n + " карт, отсортированы по награде в монетах.",
     endlessNote: n => n + " режимов. Сундук из награды падает с указанным шансом.",
@@ -323,6 +327,10 @@ const I18N = {
     secPity: "Pity and modifiers", pityOf: "Pity · ", pModifiers: "Unit modifiers",
     thRarity: "Rarity", thSummons: "Summons", thModifier: "Modifier", thChance: "Chance", thEffect: "Effect",
     modesNote: "Reward for clearing a match. For endless modes this is the set paid out for a cleared stretch of waves.",
+    secFarm: "Where to farm what", thCurrency: "Reward", thSources: "Comes from",
+    thBest: "Best map", thAmount: "Per match", sourcesN: n => n + " modes",
+    allRewards: "All rewards", tagBest: "best",
+    farmNote: "XP works the other way round: the short kitchen maps pay more of it than the expensive ones. Level 3 hands out 25 XP next to 65 coins, while Doomspire gives 13 next to 1500. Bones, cogs and suns each come from exactly one mode.",
     secNormal: "Regular maps", secEndless: "Endless",
     normalNote: n => n + " maps, sorted by the coin reward.",
     endlessNote: n => n + " modes. The chest in the reward drops at the listed chance.",
@@ -595,23 +603,83 @@ function pityPanels(){
 }
 
 /* ========== КАТКИ ========== */
-function modeCard(m, i){
+const CUR_ORDER = ["Cash", "Gems", "Stars", "Chi", "Sheckles", "Bones", "Cogs", "Suns"];
+const mState = { cur: "" };
+
+// Сводка по каждой награде: сколько режимов её дают и где её больше всего.
+function farmRows(){
+  return CUR_ORDER.map(c => {
+    const src = MODES.filter(m => m.currencies.some(x => x.raw === c))
+      .map(m => ({ name: m.name, amount: m.currencies.find(x => x.raw === c).amount }))
+      .sort((a, b) => b.amount - a.amount);
+    return src.length ? { raw: c, count: src.length, best: src[0] } : null;
+  }).filter(Boolean);
+}
+
+function farmPanel(){
+  return '<div class="panel" style="margin-top:0"><h3>' + T.secFarm + "</h3>"
+    + '<div class="tablewrap"><table><thead><tr><th>' + T.thCurrency + '</th><th class="num">'
+    + T.thSources + "</th><th>" + T.thBest + '</th><th class="num">' + T.thAmount
+    + "</th></tr></thead><tbody>"
+    + farmRows().map(r => "<tr><td><b>" + esc(cur(r.raw)) + '</b></td><td class="num">'
+        + T.sourcesN(r.count) + "</td><td>" + esc(r.best.name) + '</td><td class="num">'
+        + fmt(r.best.amount) + "</td></tr>").join("")
+    + "</tbody></table></div></div>";
+}
+
+function modeCard(m, i, hi, best){
   const c = m.endless ? "var(--r-Celestial)" : "var(--r-Rare)";
-  const rows = m.currencies.map(x => '<div class="kv"><span>' + esc(cur(x.raw)) + "</span><span>" + fmt(x.amount) + "</span></div>").join("")
+  const rows = m.currencies.map(x => {
+      const on = hi && x.raw === hi;
+      return '<div class="kv"' + (on ? ' style="background:var(--accent-soft)"' : "") + "><span"
+        + (on ? ' style="color:var(--accent)"' : "") + ">" + esc(cur(x.raw)) + "</span><span"
+        + (on ? ' style="color:var(--accent);font-weight:600"' : "") + ">" + fmt(x.amount) + "</span></div>";
+    }).join("")
     + m.chests.map(x => '<div class="kv"><span>' + esc(x.name) + "</span><span>" + esc(x.chance) + "</span></div>").join("");
   return '<div class="card" style="--c:' + c + ";animation-delay:" + Math.min(i, 24) * 18 + 'ms;cursor:default">'
     + "<h3>" + esc(m.name) + "</h3>"
-    + '<div class="meta"><span class="tag">' + (m.endless ? T.tagEndless : T.tagNormal) + "</span></div>"
+    + '<div class="meta"><span class="tag">' + (m.endless ? T.tagEndless : T.tagNormal) + "</span>"
+    + (best ? '<span class="tag tier-start">' + T.tagBest + "</span>" : "") + "</div>"
     + '<div class="kvlist" style="margin-top:11px;background:transparent;gap:0">' + rows + "</div></div>";
 }
 
 function modesView(){
-  const normal = MODES.filter(m => !m.endless), endless = MODES.filter(m => m.endless);
   return '<div class="view"><p class="secnote">' + T.modesNote + "</p>"
-    + '<h2 class="sec">' + T.secNormal + '</h2><p class="secnote">' + T.normalNote(normal.length) + "</p>"
-    + '<div class="grid modes">' + normal.map(modeCard).join("") + "</div>"
-    + '<h2 class="sec">' + T.secEndless + '</h2><p class="secnote">' + T.endlessNote(endless.length) + "</p>"
-    + '<div class="grid modes">' + endless.map(modeCard).join("") + "</div></div>";
+    + '<h2 class="sec">' + T.secFarm + '</h2><p class="secnote">' + T.farmNote + "</p>"
+    + farmPanel()
+    + '<div class="controls"><div class="chips" id="curchips">'
+    + '<button class="chip" data-c="" aria-pressed="' + (mState.cur === "") + '">' + T.allRewards + "</button>"
+    + CUR_ORDER.map(c => '<button class="chip" data-c="' + c + '" aria-pressed="' + (mState.cur === c) + '">'
+        + esc(cur(c)) + "</button>").join("")
+    + '</div></div><div id="modesBody"></div></div>';
+}
+
+function renderModes(){
+  const hi = mState.cur;
+  let list = MODES;
+  if(hi){
+    list = MODES.filter(m => m.currencies.some(x => x.raw === hi)).slice().sort((a, b) =>
+      b.currencies.find(x => x.raw === hi).amount - a.currencies.find(x => x.raw === hi).amount);
+  }
+  const normal = list.filter(m => !m.endless), endless = list.filter(m => m.endless);
+  const bestName = hi && list.length ? list[0].name : null;
+  const block = (arr, title, note) => !arr.length ? "" :
+    '<h2 class="sec">' + title + '</h2><p class="secnote">' + note + "</p>"
+    + '<div class="grid modes">' + arr.map((m, i) => modeCard(m, i, hi, m.name === bestName)).join("") + "</div>";
+  document.getElementById("modesBody").innerHTML =
+    block(normal, T.secNormal, T.normalNote(normal.length)) + block(endless, T.secEndless, T.endlessNote(endless.length))
+    || '<p class="empty">' + T.nothing + "</p>";
+}
+
+function bindModes(){
+  document.getElementById("curchips").addEventListener("click", e => {
+    const b = e.target.closest(".chip");
+    if(!b) return;
+    mState.cur = b.dataset.c;
+    document.querySelectorAll("#curchips .chip").forEach(x =>
+      x.setAttribute("aria-pressed", String(x.dataset.c === mState.cur)));
+    renderModes();
+  });
 }
 
 /* ========== РОУТЕР ========== */
@@ -640,7 +708,7 @@ function route(keepScroll){
   if(parts[0] === "unit"){ app.innerHTML = unitView(parts[1]); }
   else if(parts[0] === "box"){ app.innerHTML = boxView(parts[1]); tab = "crates"; }
   else if(parts[0] === "crates"){ app.innerHTML = cratesView(); renderCrates(); bindCrates(); tab = "crates"; }
-  else if(parts[0] === "modes"){ app.innerHTML = modesView(); tab = "modes"; }
+  else if(parts[0] === "modes"){ app.innerHTML = modesView(); renderModes(); bindModes(); tab = "modes"; }
   else { app.innerHTML = unitsView(); renderUnits(); bindUnits(); }
   document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("on", a.dataset.v === tab));
   if(!keepScroll) window.scrollTo({ top: 0, behavior: "instant" });
