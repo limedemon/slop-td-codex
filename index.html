@@ -427,7 +427,7 @@ const CASH = '<svg class="cash" viewBox="0 0 24 18" aria-hidden="true" focusable
   + '<rect x="19.6" y="10.9" width="1.5" height="2.4" rx=".7" fill="var(--money-dot)" opacity=".5"/>'
   + '</svg>';
 
-const BUILD_TS = "2026-09-13T20:31:35+05:00";
+const BUILD_TS = "2026-09-13T21:18:34+05:00";
 
 let LANG = "ru";
 try { const s = localStorage.getItem("slopcodex-lang"); if(s === "ru" || s === "en") LANG = s; } catch(e){}
@@ -838,8 +838,15 @@ function itemCard(it, i){
     + (rows || kvRow(T.noSource, "")) + "</div></div>";
 }
 
+function soonPanel(){
+  return '<div class="panel" style="margin-top:0"><div style="padding:64px 20px; text-align:center">'
+    + '<h2 style="font-size:clamp(28px,6vw,44px); color:var(--accent)">' + esc(T.valueSoon) + "</h2>"
+    + "</div></div>";
+}
+
 function craftsView(){
   return '<div class="view"><p class="secnote">' + T.craftNote + "</p>"
+    + '<h2 class="sec">' + T.secRecipes + '</h2><div class="grid boxes">' + soonPanel() + "</div>"
     + '<div class="controls"><input id="kq" type="search" placeholder="' + T.searchCrafts
     + '" value="' + esc(kState.q) + '" autocomplete="off"></div>'
     + '<p class="resultline" id="kres"></p><div id="craftsBody"></div></div>';
@@ -848,23 +855,16 @@ function craftsView(){
 function renderCrafts(){
   const q = kState.q.trim().toLowerCase();
   const hit = function(t){ return !q || String(t || "").toLowerCase().indexOf(q) !== -1; };
-  const rec = RECIPES.filter(function(r){
-    return hit(r.name) || hit(r.reward.name) || r.ingredients.some(function(x){ return hit(x.name); });
-  });
   const its = ITEMS.filter(function(it){
     return hit(it.name) || hit(it.desc) || it.drops.some(function(d){ return hit(d.map); });
   });
-  const block = function(arr, title, fn, note){
-    return !arr.length ? "" : '<h2 class="sec">' + title + "</h2>"
-      + (note ? '<p class="secnote">' + note + "</p>" : "")
-      + '<div class="grid boxes">' + arr.map(fn).join("") + "</div>";
+  const block = function(arr, title, fn){
+    return !arr.length ? "" : '<h2 class="sec">' + title + '</h2><div class="grid boxes">'
+      + arr.map(fn).join("") + "</div>";
   };
-  const anyBad = rec.some(function(r){ return r.unknownIng.length > 0; });
-  document.getElementById("craftsBody").innerHTML =
-    (block(rec, T.secRecipes, recipeCard, anyBad ? T.unknownNote : "") + block(its, T.secItems, itemCard))
+  document.getElementById("craftsBody").innerHTML = block(its, T.secItems, itemCard)
     || '<p class="empty">' + T.nothing + "</p>";
-  document.getElementById("kres").textContent =
-    T.nRecipes(rec.length, RECIPES.length) + " \u00b7 " + T.nItems(its.length, ITEMS.length);
+  document.getElementById("kres").textContent = T.nItems(its.length, ITEMS.length);
 }
 
 function bindCrafts(){
@@ -873,10 +873,7 @@ function bindCrafts(){
 
 /* ========== ПРАЙСЛИСТ ========== */
 function valueView(){
-  return '<div class="view">'
-    + '<div class="panel" style="margin-top:24px"><div style="padding:64px 20px; text-align:center">'
-    + '<h2 style="font-size:clamp(28px,6vw,44px); color:var(--accent)">' + esc(T.valueSoon) + "</h2>"
-    + "</div></div></div>";
+  return '<div class="view" style="margin-top:24px">' + soonPanel() + "</div>";
 }
 
 /* ========== РОУТЕР ========== */
