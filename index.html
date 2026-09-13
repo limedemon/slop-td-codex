@@ -20,7 +20,7 @@
   --r-Exclusive:#D12E82; --r-Hero:#0E8C80; --r-none:#756E85;
   --t-start:#2F8F4E; --t-mid:#B47908; --t-end:#C7223A;
   --money:#49BE78; --money-2:#2F8E58; --money-3:#1C6540; --money-dot:#EAFBF0;
-  --tg:#229ED9;
+  --tg:#229ED9; --rbx:#E2242A; --dc:#5865F2;
   --shadow:0 1px 2px rgba(25,20,35,.06), 0 8px 24px -16px rgba(25,20,35,.22);
   --lift:0 2px 6px rgba(25,20,35,.08), 0 18px 40px -24px rgba(25,20,35,.4);
 }
@@ -34,7 +34,7 @@
     --r-Exclusive:#FF6FB4; --r-Hero:#2FD3C2; --r-none:#958CA8;
     --t-start:#54C97C; --t-mid:#EAB040; --t-end:#FF6076;
     --money:#5AD489; --money-2:#37A465; --money-3:#207547; --money-dot:#F0FFF6;
-    --tg:#54BCEC;
+    --tg:#54BCEC; --rbx:#FF5C61; --dc:#8791FF;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
     --lift:0 2px 8px rgba(0,0,0,.5), 0 22px 44px -26px rgba(0,0,0,1);
   }
@@ -48,7 +48,7 @@
   --r-Exclusive:#FF6FB4; --r-Hero:#2FD3C2; --r-none:#958CA8;
   --t-start:#54C97C; --t-mid:#EAB040; --t-end:#FF6076;
   --money:#5AD489; --money-2:#37A465; --money-3:#207547; --money-dot:#F0FFF6;
-  --tg:#54BCEC;
+  --tg:#54BCEC; --rbx:#FF5C61; --dc:#8791FF;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
   --lift:0 2px 8px rgba(0,0,0,.5), 0 22px 44px -26px rgba(0,0,0,1);
 }
@@ -218,12 +218,15 @@ h2.sec{font-size:21px; margin:34px 0 4px}
 footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
   color:var(--muted); font-size:13px}
 footer p{max-width:76ch; margin:0}
-.tglink{display:inline-flex; align-items:center; gap:9px; margin-top:18px; padding:9px 15px 9px 12px;
+.linkrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+.tglink{display:inline-flex; align-items:center; gap:9px; padding:9px 15px 9px 12px;
   border-radius:999px; border:1px solid var(--line); background:var(--surface);
   color:var(--ink-2); text-decoration:none; font-family:"IBM Plex Mono",ui-monospace,monospace;
   font-size:13px; transition:transform .18s cubic-bezier(.2,.7,.3,1), border-color .18s ease,
   color .18s ease, box-shadow .18s ease}
 .tglink:hover{transform:translateY(-2px); color:var(--tg); border-color:var(--tg); box-shadow:var(--lift)}
+.tglink.rbx:hover{color:var(--rbx); border-color:var(--rbx)}
+.tglink.dc:hover{color:var(--dc); border-color:var(--dc)}
 .tglink svg{width:22px; height:22px; flex:none}
 .tglink b{color:var(--ink); font-weight:600}
 @media (max-width:520px){
@@ -260,13 +263,29 @@ footer p{max-width:76ch; margin:0}
 
 <footer>
   <p id="footnote"></p>
-  <a class="tglink" id="tglink" href="https://t.me/L1meYT" target="_blank" rel="noopener noreferrer">
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <circle cx="12" cy="12" r="12" fill="var(--tg)"/>
-      <path fill="#FFFFFF" d="M5.4 11.7 16.6 7.3c.6-.2 1.1.2.9.9l-1.9 9c-.1.6-.5.8-1 .5l-2.8-2.1-1.4 1.3c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z"/>
-    </svg>
-    <span id="tgtext"></span>
-  </a>
+  <div class="linkrow">
+    <a class="tglink" id="tglink" href="https://t.me/L1meYT" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="12" fill="var(--tg)"/>
+        <path fill="#FFFFFF" d="M5.4 11.7 16.6 7.3c.6-.2 1.1.2.9.9l-1.9 9c-.1.6-.5.8-1 .5l-2.8-2.1-1.4 1.3c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z"/>
+      </svg>
+      <span id="tgtext"></span>
+    </a>
+    <a class="tglink rbx" id="gamelink" href="https://www.roblox.com/games/134459712190924/Slop-Tower-Defense" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="12" fill="var(--rbx)"/>
+        <path fill="#FFFFFF" d="M9.6 7.2h7.2v7.2H9.6z" transform="rotate(-11 12 12)"/>
+      </svg>
+      <span id="gametext"></span>
+    </a>
+    <a class="tglink dc" id="dclink" href="https://discord.gg/j25AuJ3pe" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="12" fill="var(--dc)"/>
+        <path fill="#FFFFFF" d="M16.9 8.05a8.9 8.9 0 0 0-2.13-.66l-.15.27a7.9 7.9 0 0 0-2.28 0l-.15-.27a8.9 8.9 0 0 0-2.13.66c-1.19 1.72-1.51 3.4-1.35 5.04a8.96 8.96 0 0 0 2.62 1.31l.32-.53c-.17-.06-.34-.14-.5-.23a3.7 3.7 0 0 0 .17-.13c1.62.74 3.4.74 5 0l.16.13c-.16.09-.33.17-.5.23l.32.53a8.94 8.94 0 0 0 2.62-1.31c.19-1.9-.32-3.56-1.32-5.04zM10.35 12.3c-.5 0-.9-.45-.9-1s.4-1 .9-1 .9.46.9 1-.4 1-.9 1zm3.3 0c-.5 0-.9-.45-.9-1s.4-1 .9-1 .9.46.9 1-.4 1-.9 1z"/>
+      </svg>
+      <span id="dctext"></span>
+    </a>
+  </div>
 </footer>
 </div>
 
@@ -330,7 +349,7 @@ const I18N = {
     thBest: "Лучшее место", thAmount: "За катку", sourcesN: n => n + " реж.",
     allRewards: "Все награды", tagBest: "лучшая", onlyWith: "только с этой наградой",
     updated: "обновлено", today: "сегодня", yesterday: "вчера",
-    tgText: "Телеграм-канал",
+    tgText: "Телеграм-канал", gameText: "Игра в Roblox", dcText: "Discord-сервер",
     daysAgo: n => n + " дн. назад",
     farmNote: "Опыт устроен наоборот: короткие кухонные карты дают его больше, чем дорогие. Level 3 отдаёт 25 опыта при 65 монетах, а Doomspire — 13 при 1500. Кости, шестерни и солнца выпадают ровно из одного режима каждая.",
     secNormal: "Обычные карты", secEndless: "Эндлес",
@@ -397,7 +416,7 @@ const I18N = {
     thBest: "Best map", thAmount: "Per match", sourcesN: n => n + " modes",
     allRewards: "All rewards", tagBest: "best", onlyWith: "only maps that pay it",
     updated: "updated", today: "today", yesterday: "yesterday",
-    tgText: "Telegram channel",
+    tgText: "Telegram channel", gameText: "Play on Roblox", dcText: "Discord server",
     daysAgo: n => n + " days ago",
     farmNote: "XP works the other way round: the short kitchen maps pay more of it than the expensive ones. Level 3 hands out 25 XP next to 65 coins, while Doomspire gives 13 next to 1500. Bones, cogs and suns each come from exactly one mode.",
     secNormal: "Regular maps", secEndless: "Endless",
@@ -427,7 +446,7 @@ const CASH = '<svg class="cash" viewBox="0 0 24 18" aria-hidden="true" focusable
   + '<rect x="19.6" y="10.9" width="1.5" height="2.4" rx=".7" fill="var(--money-dot)" opacity=".5"/>'
   + '</svg>';
 
-const BUILD_TS = "2026-09-13T21:18:34+05:00";
+const BUILD_TS = "2026-09-13T22:08:10+05:00";
 
 let LANG = "ru";
 try { const s = localStorage.getItem("slopcodex-lang"); if(s === "ru" || s === "en") LANG = s; } catch(e){}
@@ -887,6 +906,8 @@ function chrome(){
   document.getElementById("intro").textContent = T.intro;
   document.getElementById("footnote").textContent = T.footnote;
   document.getElementById("tgtext").innerHTML = T.tgText + " <b>@L1meYT</b>";
+  document.getElementById("gametext").textContent = T.gameText;
+  document.getElementById("dctext").textContent = T.dcText;
   const labels = { units: T.tabUnits, crates: T.tabCrates, modes: T.tabModes, crafts: T.tabCrafts, value: T.tabValue };
   document.querySelectorAll("#tabs a").forEach(a => a.querySelector(".lbl").textContent = labels[a.dataset.v]);
   document.getElementById("n-units").textContent = U.length;
