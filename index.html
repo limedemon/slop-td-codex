@@ -6,7 +6,7 @@
 <meta name="description" content="Slop TD player handbook: units, upgrades, crate odds and match rewards.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%97%BF%3C/text%3E%3C/svg%3E">
 <style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Слоп ТД</title>
+<title>Slop TD FAQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -280,8 +280,8 @@ const boxByName = {}; BOXES.forEach(b => boxByName[b.name] = b);
 /* ========== ЛОКАЛИЗАЦИЯ ========== */
 const I18N = {
   ru: {
-    locale: "ru-RU", docTitle: "Слоп ТД",
-    brand: "Слоп ТД", tagline: "справочник игрока",
+    locale: "ru-RU", docTitle: "Slop TD FAQ",
+    brand: "Slop TD FAQ", tagline: "справочник игрока",
     intro: "Юниты со всеми статами и прокачкой, ящики с шансами дропа и награды за катки — всё в одном месте, с поиском и фильтрами.",
     footnote: "Деление на старт, мид и эндгейм — по цене установки: до 700, до 2500 и выше. Значения соответствуют текущей версии игры и могут измениться с обновлениями.",
     tabUnits: "Юниты", tabCrates: "Ящики", tabModes: "Катки", tabCrafts: "Крафты",
@@ -347,8 +347,8 @@ const I18N = {
     mods: { Shiny: "+10% ко всем характеристикам", Void: "+25% ко всем характеристикам" }
   },
   en: {
-    locale: "en-US", docTitle: "Slop TD",
-    brand: "Slop TD", tagline: "player handbook",
+    locale: "en-US", docTitle: "Slop TD FAQ",
+    brand: "Slop TD FAQ", tagline: "player handbook",
     intro: "Every unit with its stats and upgrade path, every crate with its drop odds, and the rewards each match pays out — all searchable in one place.",
     footnote: "Early, mid and endgame are split by placement price: up to 700, up to 2500, and above. Values match the current version of the game and may change with updates.",
     tabUnits: "Units", tabCrates: "Crates", tabModes: "Matches", tabCrafts: "Crafts",
@@ -427,7 +427,7 @@ const CASH = '<svg class="cash" viewBox="0 0 24 18" aria-hidden="true" focusable
   + '<rect x="19.6" y="10.9" width="1.5" height="2.4" rx=".7" fill="var(--money-dot)" opacity=".5"/>'
   + '</svg>';
 
-const BUILD_TS = "2026-09-13T20:11:06+05:00";
+const BUILD_TS = "2026-09-13T20:25:24+05:00";
 
 let LANG = "ru";
 try { const s = localStorage.getItem("slopcodex-lang"); if(s === "ru" || s === "en") LANG = s; } catch(e){}

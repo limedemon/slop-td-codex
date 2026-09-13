@@ -1,0 +1,969 @@
+<title>Slop TD FAQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F1EFF6; --surface:#FFFFFF; --surface-2:#F7F5FB; --line:#DCD7E6;
+  --ink:#191423; --ink-2:#4A4358; --muted:#756E85; --accent:#5B34D6; --accent-soft:#EDE7FD;
+  --off:#8A8296;
+  --r-Common:#7E7889; --r-Uncommon:#2F8F4E; --r-Rare:#2563EB; --r-Legendary:#B47908;
+  --r-Mythical:#A32FB8; --r-Godly:#D2541C; --r-Secret:#C7223A; --r-Celestial:#0E8FA3;
+  --r-Exclusive:#D12E82; --r-Hero:#0E8C80; --r-none:#756E85;
+  --t-start:#2F8F4E; --t-mid:#B47908; --t-end:#C7223A;
+  --money:#49BE78; --money-2:#2F8E58; --money-3:#1C6540; --money-dot:#EAFBF0;
+  --tg:#229ED9;
+  --shadow:0 1px 2px rgba(25,20,35,.06), 0 8px 24px -16px rgba(25,20,35,.22);
+  --lift:0 2px 6px rgba(25,20,35,.08), 0 18px 40px -24px rgba(25,20,35,.4);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#120F19; --surface:#1A1624; --surface-2:#211C2D; --line:#2F2840;
+    --ink:#EEEAF6; --ink-2:#C3BCD3; --muted:#958CA8; --accent:#B196FF; --accent-soft:#2A2140;
+    --off:#7B7390;
+    --r-Common:#9A94A8; --r-Uncommon:#54C97C; --r-Rare:#6CA0FF; --r-Legendary:#EAB040;
+    --r-Mythical:#D473E6; --r-Godly:#FF8B4F; --r-Secret:#FF6076; --r-Celestial:#3DD2E6;
+    --r-Exclusive:#FF6FB4; --r-Hero:#2FD3C2; --r-none:#958CA8;
+    --t-start:#54C97C; --t-mid:#EAB040; --t-end:#FF6076;
+    --money:#5AD489; --money-2:#37A465; --money-3:#207547; --money-dot:#F0FFF6;
+    --tg:#54BCEC;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+    --lift:0 2px 8px rgba(0,0,0,.5), 0 22px 44px -26px rgba(0,0,0,1);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#120F19; --surface:#1A1624; --surface-2:#211C2D; --line:#2F2840;
+  --ink:#EEEAF6; --ink-2:#C3BCD3; --muted:#958CA8; --accent:#B196FF; --accent-soft:#2A2140;
+  --off:#7B7390;
+  --r-Common:#9A94A8; --r-Uncommon:#54C97C; --r-Rare:#6CA0FF; --r-Legendary:#EAB040;
+  --r-Mythical:#D473E6; --r-Godly:#FF8B4F; --r-Secret:#FF6076; --r-Celestial:#3DD2E6;
+  --r-Exclusive:#FF6FB4; --r-Hero:#2FD3C2; --r-none:#958CA8;
+  --t-start:#54C97C; --t-mid:#EAB040; --t-end:#FF6076;
+  --money:#5AD489; --money-2:#37A465; --money-3:#207547; --money-dot:#F0FFF6;
+  --tg:#54BCEC;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+  --lift:0 2px 8px rgba(0,0,0,.5), 0 22px 44px -26px rgba(0,0,0,1);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif; font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Chakra Petch","Segoe UI",system-ui,sans-serif; font-weight:700;
+  text-wrap:balance; margin:0}
+.wrap{max-width:1200px; margin:0 auto; padding-inline:20px; padding-block:0 72px}
+
+header.top{padding-block:34px 18px}
+.brand{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.brand h1{font-size:clamp(26px,4.4vw,38px); letter-spacing:-.01em; line-height:1.05}
+.brand .tagline{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent)}
+.brand p{margin:0; color:var(--ink-2); flex-basis:100%; max-width:66ch}
+
+nav.tabs{position:sticky; top:0; z-index:30; background:var(--ground);
+  border-bottom:1px solid var(--line); display:flex; gap:4px; flex-wrap:wrap; align-items:center;
+  padding-block:10px; margin-top:14px}
+nav.tabs a{font-family:"Chakra Petch",sans-serif; font-weight:700; font-size:15px;
+  text-decoration:none; color:var(--muted); padding:7px 14px; border-radius:8px;
+  transition:background .18s ease, color .18s ease}
+nav.tabs a:hover{color:var(--ink); background:var(--surface-2)}
+nav.tabs a.on{color:var(--accent); background:var(--accent-soft)}
+nav.tabs a .n{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:400;
+  color:var(--muted); margin-left:6px}
+.updated{margin-left:auto; display:flex; align-items:center; gap:7px; padding:5px 11px;
+  border-radius:999px; border:1px solid var(--line); background:var(--surface);
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; color:var(--muted);
+  white-space:nowrap}
+.updated .dot{width:7px; height:7px; border-radius:50%; background:var(--t-start); flex:none;
+  box-shadow:0 0 0 0 var(--t-start); animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,143,78,.5)} 70%{box-shadow:0 0 0 7px rgba(47,143,78,0)}
+  100%{box-shadow:0 0 0 0 rgba(47,143,78,0)}}
+.updated b{color:var(--ink-2); font-weight:600}
+.langswitch{margin-left:10px; display:flex; gap:2px; padding:2px; border-radius:999px;
+  border:1px solid var(--line); background:var(--surface)}
+.langswitch button{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
+  font-weight:600; letter-spacing:.08em; padding:5px 11px; border:0; border-radius:999px;
+  background:transparent; color:var(--muted); cursor:pointer;
+  transition:background .18s ease, color .18s ease}
+.langswitch button:hover{color:var(--ink)}
+.langswitch button[aria-pressed="true"]{background:var(--accent-soft); color:var(--accent)}
+nav.tabs a:focus-visible, .card:focus-visible, .chip:focus-visible, input:focus-visible,
+select:focus-visible, .back:focus-visible, .langswitch button:focus-visible{
+  outline:2px solid var(--accent); outline-offset:2px}
+
+.controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:20px 0 6px}
+.controls input[type="search"], .controls select{padding:9px 12px; border-radius:8px;
+  border:1px solid var(--line); background:var(--surface); color:var(--ink); font:inherit}
+.controls input[type="search"]{flex:1 1 240px; min-width:0}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:.06em;
+  text-transform:uppercase; padding:5px 9px; border-radius:999px; cursor:pointer;
+  border:1px solid var(--line); background:var(--surface); color:var(--muted);
+  transition:background .16s ease, color .16s ease, border-color .16s ease}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
+.resultline{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12px;
+  color:var(--muted); margin:0 0 16px}
+
+.grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.grid.boxes{grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
+.grid.modes{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+
+.card{position:relative; display:block; width:100%; text-align:left; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  padding:14px 15px 13px 18px; box-shadow:var(--shadow); color:inherit; font:inherit;
+  overflow:hidden; transition:transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s ease,
+  border-color .18s ease; animation:pop .32s cubic-bezier(.2,.7,.3,1) both}
+.card::before{content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--c,var(--line))}
+.card:hover{transform:translateY(-3px); box-shadow:var(--lift); border-color:var(--c,var(--accent))}
+@keyframes pop{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+.card h3{font-size:16px; line-height:1.2; overflow-wrap:anywhere; display:flex; align-items:center; gap:9px}
+.icon{object-fit:contain; background:var(--surface-2); border-radius:7px; flex:none}
+.card h3 .icon{width:30px; height:30px}
+.detail-head .icon{width:56px; height:56px; border-radius:10px}
+.dname .icon, .unitchip .icon{width:18px; height:18px; border-radius:4px; vertical-align:-4px; margin-right:5px}
+.curicon{width:15px; height:15px; border-radius:3px; vertical-align:-2px; margin-right:3px; object-fit:contain}
+.card .meta{display:flex; flex-wrap:wrap; gap:5px; margin-top:7px}
+.card .foot{display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-top:11px}
+.card .price{font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:15px;
+  display:inline-flex; align-items:center; gap:6px}
+.cash{width:26px; height:19.5px; flex:none; display:inline-block; vertical-align:-4px;
+  transition:transform .2s cubic-bezier(.2,.7,.3,1)}
+.card:hover .cash{transform:translateY(-2px) rotate(-6deg) scale(1.06)}
+.stat .v .cash{width:32px; height:24px; vertical-align:-5px; margin-right:6px}
+.card .dps{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--muted)}
+
+.tag{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.07em;
+  text-transform:uppercase; padding:2px 7px; border-radius:4px; white-space:nowrap;
+  border:1px solid var(--line); color:var(--ink-2); background:var(--surface-2)}
+.tag.rar{color:#FFFFFF; border-color:transparent}
+.tag.tier-start{color:var(--t-start); border-color:currentColor; background:transparent}
+.tag.tier-mid{color:var(--t-mid); border-color:currentColor; background:transparent}
+.tag.tier-end{color:var(--t-end); border-color:currentColor; background:transparent}
+
+.view{animation:slidein .3s cubic-bezier(.2,.7,.3,1) both}
+@keyframes slidein{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+.back{display:inline-flex; align-items:center; gap:7px; font-family:"IBM Plex Mono",monospace;
+  font-size:12.5px; color:var(--muted); text-decoration:none; margin:18px 0 14px;
+  transition:color .16s ease}
+.back:hover{color:var(--accent)}
+
+.detail-head{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline;
+  padding-bottom:16px; border-bottom:1px solid var(--line)}
+.detail-head h2{font-size:clamp(23px,4vw,33px); line-height:1.05}
+.detail-head .tags{display:flex; flex-wrap:wrap; gap:6px}
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  box-shadow:var(--shadow); overflow:hidden; margin-top:18px}
+.panel > h3{padding:13px 16px 11px; border-bottom:1px solid var(--line);
+  background:var(--surface-2); font-size:15px}
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+  background:var(--line)}
+.stat{background:var(--surface); padding:13px 16px}
+.stat .k{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+.stat .v{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:19px; font-weight:600;
+  font-variant-numeric:tabular-nums; margin-top:3px}
+.stat .d{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; color:var(--muted)}
+
+table{width:100%; border-collapse:collapse; font-size:13.5px}
+table th, table td{text-align:left; padding:8px 16px; border-top:1px solid var(--line)}
+table th{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px;
+  letter-spacing:.07em; text-transform:uppercase; color:var(--muted); font-weight:400}
+table thead th{border-top:0}
+table td.num, table th.num{text-align:right; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums}
+table tbody tr{transition:background .14s ease}
+table tbody tr:hover{background:var(--surface-2)}
+tfoot td{font-weight:600; background:var(--surface-2)}
+.tablewrap{overflow-x:auto}
+
+.kvlist{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1px;
+  background:var(--line)}
+.kv{background:var(--surface); padding:11px 16px; display:flex; justify-content:space-between;
+  gap:12px; font-size:13.5px}
+.kv span:first-child{color:var(--muted)}
+.kv span:last-child{font-family:"IBM Plex Mono",ui-monospace,monospace; text-align:right}
+.kv .icon{width:18px; height:18px; border-radius:4px; vertical-align:-4px; margin-right:5px}
+
+.drops{list-style:none; margin:0; padding:0}
+.drop{display:grid; grid-template-columns:3px 1fr auto; gap:0 12px; align-items:center;
+  padding:8px 16px 8px 0; border-top:1px solid var(--line)}
+.stripe{width:3px; align-self:stretch; border-radius:0 2px 2px 0}
+.dname .n{display:block; overflow-wrap:anywhere}
+.dname .r{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px;
+  letter-spacing:.07em; text-transform:uppercase}
+.dnum{text-align:right; white-space:nowrap}
+.pct{display:block; font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:14px;
+  font-variant-numeric:tabular-nums}
+.odds{display:block; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.pool{padding:8px 16px 12px; display:flex; flex-wrap:wrap; gap:5px}
+.unitchip{font-size:12px; padding:2px 8px; border-radius:5px; background:var(--surface-2);
+  border:1px solid var(--line); color:var(--ink-2)}
+.unitchip.boost{border-color:var(--accent); color:var(--accent); font-weight:600}
+.note{padding:10px 16px; border-top:1px solid var(--line); background:var(--surface-2);
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; color:var(--muted)}
+.note.warn{color:var(--t-end)}
+
+.empty{padding:34px 0; color:var(--muted); font-family:"IBM Plex Mono",monospace; font-size:13px}
+.secnote{margin:0 0 18px; color:var(--muted); font-size:13.5px; max-width:72ch}
+h2.sec{font-size:21px; margin:34px 0 4px}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:13px}
+footer p{max-width:76ch; margin:0}
+.tglink{display:inline-flex; align-items:center; gap:9px; margin-top:18px; padding:9px 15px 9px 12px;
+  border-radius:999px; border:1px solid var(--line); background:var(--surface);
+  color:var(--ink-2); text-decoration:none; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:13px; transition:transform .18s cubic-bezier(.2,.7,.3,1), border-color .18s ease,
+  color .18s ease, box-shadow .18s ease}
+.tglink:hover{transform:translateY(-2px); color:var(--tg); border-color:var(--tg); box-shadow:var(--lift)}
+.tglink svg{width:22px; height:22px; flex:none}
+.tglink b{color:var(--ink); font-weight:600}
+@media (max-width:520px){
+  .drop{grid-template-columns:3px 1fr; row-gap:2px}
+  .dnum{grid-column:2; text-align:left; display:flex; gap:10px; align-items:baseline}
+  .langswitch, .updated{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <h1 id="brand"></h1>
+    <span class="tagline" id="tagline"></span>
+    <p id="intro"></p>
+  </div>
+  <nav class="tabs" id="tabs">
+    <a href="#/units" data-v="units"><span class="lbl"></span><span class="n" id="n-units"></span></a>
+    <a href="#/crates" data-v="crates"><span class="lbl"></span><span class="n" id="n-crates"></span></a>
+    <a href="#/modes" data-v="modes"><span class="lbl"></span><span class="n" id="n-modes"></span></a>
+    <a href="#/crafts" data-v="crafts"><span class="lbl"></span><span class="n" id="n-crafts"></span></a>
+    <a href="#/value" data-v="value"><span class="lbl"></span></a>
+    <div class="updated" id="updated" title=""></div>
+    <div class="langswitch" id="langswitch">
+      <button type="button" data-lang="ru">RU</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </nav>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <p id="footnote"></p>
+  <a class="tglink" id="tglink" href="https://t.me/L1meYT" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="12" fill="var(--tg)"/>
+      <path fill="#FFFFFF" d="M5.4 11.7 16.6 7.3c.6-.2 1.1.2.9.9l-1.9 9c-.1.6-.5.8-1 .5l-2.8-2.1-1.4 1.3c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z"/>
+    </svg>
+    <span id="tgtext"></span>
+  </a>
+</footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const U = DATA.units, MODES = DATA.modes;
+const BOXES = DATA.crates.concat(DATA.chests);
+const byName = {}; U.forEach(u => byName[u.name] = u);
+const boxByName = {}; BOXES.forEach(b => boxByName[b.name] = b);
+
+/* ========== ЛОКАЛИЗАЦИЯ ========== */
+const I18N = {
+  ru: {
+    locale: "ru-RU", docTitle: "Slop TD FAQ",
+    brand: "Slop TD FAQ", tagline: "справочник игрока",
+    intro: "Юниты со всеми статами и прокачкой, ящики с шансами дропа и награды за катки — всё в одном месте, с поиском и фильтрами.",
+    footnote: "Деление на старт, мид и эндгейм — по цене установки: до 700, до 2500 и выше. Значения соответствуют текущей версии игры и могут измениться с обновлениями.",
+    tabUnits: "Юниты", tabCrates: "Ящики", tabModes: "Катки", tabCrafts: "Крафты",
+    craftNote: "Крафт не выдаёт юнитов напрямую: за собранный рецепт дают валюту или сундук, а юниты выпадают уже из него. Материалы под рецепты падают с карт и продаются у мерчантов.",
+    secRecipes: "Рецепты", secItems: "Материалы",
+    needFor: "Ингредиентов", gives: "Даёт",
+    noSource: "источник не указан", unknownIng: "нет в игре",
+    unknownNote: "Этих материалов нет ни в списке предметов игры, ни в инвентаре. Рецепт на сервере есть, но собрать его пока не из чего.",
+    searchCrafts: "Рецепт, материал или награда…",
+    nRecipes: (a, b) => "рецептов " + a + " из " + b,
+    nItems: (a, b) => "материалов " + a + " из " + b,
+    searchUnits: "Имя юнита или тип…", searchBoxes: "Ящик или юнит внутри…",
+    allTypes: "Все типы",
+    sortPrice: "По цене", sortDps: "По макс. ДПС", sortTotal: "По цене с прокачкой", sortName: "По имени",
+    shown: (a, b) => "показано " + a + " из " + b,
+    nothing: "Ничего не найдено.",
+    maxDpsShort: "макс. ДПС ",
+    backUnits: "← ко всем юнитам", backBoxes: "← ко всем ящикам",
+    pStats: "Характеристики", pUpgrades: "Прокачка", pMisc: "Прочее",
+    pGeneral: "Общее", pDrops: "Что падает",
+    sDamage: "Урон", sCooldown: "Перезарядка", sRange: "Дальность", sDps: "ДПС", sPlace: "Установка",
+    base: "база ", sec: " с", maxUpgraded: "макс. прокачка ",
+    thLvl: "Ур.", thPrice: "Цена", thDmg: "Урон", thCd: "КД", thRange: "Дальность", thFarm: "Ферма",
+    thDps: "ДПС", thSpent: "Вложено", thTotal: "Итого",
+    noUpgrades: "У этого юнита нет таблицы прокачки.",
+    kLimit: "Лимит на карте", vNoLimit: "без лимита", pcs: " шт.",
+    kFromSummon: "Выпадает из саммона", vYes: "да", vNo: "нет", vUnknown: "не указано",
+    kPools: "Пулы саммона", kBoxes: "Ящики и сундуки", dash: "—",
+    tagPremium: "Премиум-саммон", tagHidden: "Скрыт в индексе",
+    showDisabled: "Показать выключенные", disabled: "выключен", enabled: "включён",
+    tagAfk: "АФК-плаза", afkSource: "АФК-плаза, +1 в минуту",
+    tagMerchant: "у мерчанта", unavailable: "пока недоступен",
+    kSource: "Как получить", shopPrice: "Цена в магазине",
+    tabValue: "Прайслист", valueSoon: "Скоро!..",
+    positions: " позиций", rarest: "редчайшее: ", atMerchant: "у мерчанта",
+    kState: "Состояние", kInside: "Позиций внутри",
+    sumChances: c => "сумма шансов " + c + "%",
+    sumByRarity: c => "сумма по редкостям " + c + "%",
+    currency: "валюта", noChance: "шанс не задан",
+    secSummons: "Саммоны",
+    summonNote: "Шанс задан редкости, а не отдельному юниту. Юнит в рамке — текущий буст.",
+    secPity: "Пити и модификаторы", pityOf: "Пити · ", pModifiers: "Модификаторы юнита",
+    thRarity: "Редкость", thSummons: "Саммонов", thModifier: "Модификатор", thChance: "Шанс", thEffect: "Эффект",
+    modesNote: "Награда за пройденную катку. В эндлесах показан набор, который выдаётся за пройденный отрезок волн.",
+    secFarm: "Где что фармить", thCurrency: "Награда", thSources: "Откуда падает",
+    thBest: "Лучшее место", thAmount: "За катку", sourcesN: n => n + " реж.",
+    allRewards: "Все награды", tagBest: "лучшая", onlyWith: "только с этой наградой",
+    updated: "обновлено", today: "сегодня", yesterday: "вчера",
+    tgText: "Телеграм-канал",
+    daysAgo: n => n + " дн. назад",
+    farmNote: "Опыт устроен наоборот: короткие кухонные карты дают его больше, чем дорогие. Level 3 отдаёт 25 опыта при 65 монетах, а Doomspire — 13 при 1500. Кости, шестерни и солнца выпадают ровно из одного режима каждая.",
+    secNormal: "Обычные карты", secEndless: "Эндлес",
+    normalNote: n => n + " карт, отсортированы по награде в монетах.",
+    endlessNote: n => n + " режимов. Сундук из награды падает с указанным шансом.",
+    tagEndless: "эндлес", tagNormal: "обычная карта",
+    oneIn: n => "1 из " + n,
+    tiers: { start: "Старт", mid: "Мид", end: "Эндгейм" },
+    cur: { Cash: "Монеты", Gems: "Гемы", Stars: "Звёзды", Chi: "Опыт", Sheckles: "Шеклы",
+           Bones: "Кости", Cogs: "Шестерни", Suns: "Солнца", Slopbux: "Slopbux",
+           Ink: "Чернила", "Quest Tokens": "Квест-токены", Crystals: "Кристаллы" },
+    src: { merchant: "Мерчант", questMerchant: "Квестовый мерчант", raidMerchant: "Рейд-мерчант",
+           inkMerchant: "Чернильный мерчант", dungeonMerchant: "Мерчант подземелья" },
+    mods: { Shiny: "+10% ко всем характеристикам", Void: "+25% ко всем характеристикам" }
+  },
+  en: {
+    locale: "en-US", docTitle: "Slop TD FAQ",
+    brand: "Slop TD FAQ", tagline: "player handbook",
+    intro: "Every unit with its stats and upgrade path, every crate with its drop odds, and the rewards each match pays out — all searchable in one place.",
+    footnote: "Early, mid and endgame are split by placement price: up to 700, up to 2500, and above. Values match the current version of the game and may change with updates.",
+    tabUnits: "Units", tabCrates: "Crates", tabModes: "Matches", tabCrafts: "Crafts",
+    tabValue: "Value List", valueSoon: "Soon!..",
+    craftNote: "Crafting never hands out a unit directly: a finished recipe pays currency or a chest, and the units come out of that chest. Materials drop from maps and are sold by merchants.",
+    secRecipes: "Recipes", secItems: "Materials",
+    needFor: "Ingredients", gives: "Gives",
+    noSource: "source not listed", unknownIng: "not in the game",
+    unknownNote: "These materials appear in neither the game's item list nor the inventory. The recipe exists on the server, but there is nothing to build it from yet.",
+    searchCrafts: "Recipe, material or reward…",
+    nRecipes: (a, b) => "recipes " + a + " of " + b,
+    nItems: (a, b) => "materials " + a + " of " + b,
+    searchUnits: "Unit name or type…", searchBoxes: "Crate or a unit inside…",
+    allTypes: "All types",
+    sortPrice: "By price", sortDps: "By max DPS", sortTotal: "By fully upgraded cost", sortName: "By name",
+    shown: (a, b) => "showing " + a + " of " + b,
+    nothing: "Nothing found.",
+    maxDpsShort: "max DPS ",
+    backUnits: "← all units", backBoxes: "← all crates",
+    pStats: "Stats", pUpgrades: "Upgrades", pMisc: "Other",
+    pGeneral: "Overview", pDrops: "Drops",
+    sDamage: "Damage", sCooldown: "Cooldown", sRange: "Range", sDps: "DPS", sPlace: "Placement",
+    base: "base ", sec: " s", maxUpgraded: "fully upgraded ",
+    thLvl: "Lvl", thPrice: "Price", thDmg: "Damage", thCd: "CD", thRange: "Range", thFarm: "Farm",
+    thDps: "DPS", thSpent: "Spent", thTotal: "Total",
+    noUpgrades: "This unit has no upgrade path.",
+    kLimit: "Limit per map", vNoLimit: "no limit", pcs: "",
+    kFromSummon: "Drops from summon", vYes: "yes", vNo: "no", vUnknown: "not listed",
+    kPools: "Summon pools", kBoxes: "Crates and chests", dash: "—",
+    tagPremium: "Premium summon", tagHidden: "Hidden in index",
+    showDisabled: "Show disabled", disabled: "disabled", enabled: "enabled",
+    tagAfk: "AFK plaza", afkSource: "AFK plaza, +1 per minute",
+    tagMerchant: "from a merchant", unavailable: "not available yet",
+    kSource: "How to get it", shopPrice: "Shop price",
+    positions: " entries", rarest: "rarest: ", atMerchant: "from a merchant",
+    kState: "State", kInside: "Entries inside",
+    sumChances: c => "odds add up to " + c + "%",
+    sumByRarity: c => "rarity odds add up to " + c + "%",
+    currency: "currency", noChance: "no chance listed",
+    secSummons: "Summons",
+    summonNote: "The chance belongs to the rarity, not to a single unit. The outlined unit is the current boost.",
+    secPity: "Pity and modifiers", pityOf: "Pity · ", pModifiers: "Unit modifiers",
+    thRarity: "Rarity", thSummons: "Summons", thModifier: "Modifier", thChance: "Chance", thEffect: "Effect",
+    modesNote: "Reward for clearing a match. For endless modes this is the set paid out for a cleared stretch of waves.",
+    secFarm: "Where to farm what", thCurrency: "Reward", thSources: "Comes from",
+    thBest: "Best map", thAmount: "Per match", sourcesN: n => n + " modes",
+    allRewards: "All rewards", tagBest: "best", onlyWith: "only maps that pay it",
+    updated: "updated", today: "today", yesterday: "yesterday",
+    tgText: "Telegram channel",
+    daysAgo: n => n + " days ago",
+    farmNote: "XP works the other way round: the short kitchen maps pay more of it than the expensive ones. Level 3 hands out 25 XP next to 65 coins, while Doomspire gives 13 next to 1500. Bones, cogs and suns each come from exactly one mode.",
+    secNormal: "Regular maps", secEndless: "Endless",
+    normalNote: n => n + " maps, sorted by the coin reward.",
+    endlessNote: n => n + " modes. The chest in the reward drops at the listed chance.",
+    tagEndless: "endless", tagNormal: "regular map",
+    oneIn: n => "1 in " + n,
+    tiers: { start: "Early", mid: "Mid", end: "Endgame" },
+    cur: { Cash: "Coins", Gems: "Gems", Stars: "Stars", Chi: "XP", Sheckles: "Sheckles",
+           Bones: "Bones", Cogs: "Cogs", Suns: "Suns", Slopbux: "Slopbux",
+           Ink: "Ink", "Quest Tokens": "Quest Tokens", Crystals: "Crystals" },
+    src: { merchant: "Merchant", questMerchant: "Quest Merchant", raidMerchant: "Raid Merchant",
+           inkMerchant: "Ink Merchant", dungeonMerchant: "Dungeon Merchant" },
+    mods: { Shiny: "+10% to all stats", Void: "+25% to all stats" }
+  }
+};
+
+function iconTag(path){ return path ? ('<img class="icon" src="' + esc(path) + '" alt="" loading="lazy">') : ""; }
+function curIcon(raw){ var p = DATA.currencyIcons && DATA.currencyIcons[raw]; return p ? ('<img class="curicon" src="' + esc(p) + '" alt="" loading="lazy">') : ""; }
+
+const CASH = '<svg class="cash" viewBox="0 0 24 18" aria-hidden="true" focusable="false">'
+  + '<rect x="0.6" y="0.8" width="15" height="8.2" rx="1.8" fill="var(--money-3)"/>'
+  + '<rect x="4.2" y="4.4" width="15" height="8.2" rx="1.8" fill="var(--money-2)"/>'
+  + '<rect x="7.8" y="8" width="15" height="8.2" rx="1.8" fill="var(--money)"/>'
+  + '<circle cx="15.3" cy="12.1" r="2.5" fill="var(--money-dot)" opacity=".95"/>'
+  + '<rect x="9.5" y="10.9" width="1.5" height="2.4" rx=".7" fill="var(--money-dot)" opacity=".5"/>'
+  + '<rect x="19.6" y="10.9" width="1.5" height="2.4" rx=".7" fill="var(--money-dot)" opacity=".5"/>'
+  + '</svg>';
+
+const BUILD_TS = "__BUILD__";
+
+let LANG = "ru";
+try { const s = localStorage.getItem("slopcodex-lang"); if(s === "ru" || s === "en") LANG = s; } catch(e){}
+let T = I18N[LANG];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+const rc = r => "var(--r-" + (String(r || "none").replace(/[^A-Za-z]/g, "") || "none") + ")";
+const fmt = n => (n == null ? T.dash : Number(n).toLocaleString(T.locale));
+const fmt2 = n => (n == null ? T.dash : (Math.round(n * 100) / 100).toLocaleString(T.locale));
+const cur = k => (T.cur[k] || k);
+
+function pct(v){
+  if(v >= 10) return (v % 1 ? v.toFixed(1) : v.toFixed(0)) + "%";
+  if(v >= 1) return (+v.toFixed(2)) + "%";
+  return (+v.toFixed(6)) + "%";
+}
+function odds(v){
+  if(!v) return "";
+  const n = 100 / v;
+  if(n < 2) return "";
+  let r;
+  if(n < 100) r = Math.round(n);
+  else if(n < 10000) r = Math.round(n / 10) * 10;
+  else r = Math.round(n / 100) * 100;
+  return T.oneIn(r.toLocaleString(T.locale));
+}
+
+/* ========== ЮНИТЫ ========== */
+const uState = { q: "", rar: new Set(), tier: new Set(), type: "", sort: "price" };
+
+function unitCard(u, i){
+  return '<button class="card" style="--c:' + rc(u.rarity) + ";animation-delay:" + Math.min(i, 24) * 18
+    + 'ms" data-unit="' + esc(u.name) + '"><h3>' + iconTag(u.icon) + "<span>" + esc(u.name) + "</span></h3>"
+    + '<div class="meta"><span class="tag rar" style="background:' + rc(u.rarity) + '">' + esc(u.rarity) + "</span>"
+    + '<span class="tag tier-' + u.tier + '">' + T.tiers[u.tier] + "</span>"
+    + '<span class="tag">' + esc(u.type) + "</span></div>"
+    + '<div class="foot"><span class="price">' + CASH + "<span>" + fmt(u.price) + "</span></span>"
+    + '<span class="dps">' + (u.maxDps ? T.maxDpsShort + fmt2(u.maxDps)
+        : (u.customText ? esc(u.customText) + " ×" + u.customMax : T.dash)) + "</span></div></button>";
+}
+
+function unitsView(){
+  const types = Array.from(new Set(U.map(u => u.type))).sort();
+  return '<div class="view"><div class="controls">'
+    + '<input id="uq" type="search" placeholder="' + T.searchUnits + '" value="' + esc(uState.q) + '" autocomplete="off">'
+    + '<select id="utype"><option value="">' + T.allTypes + "</option>"
+    + types.map(t => '<option value="' + esc(t) + '"' + (uState.type === t ? " selected" : "") + ">" + esc(t) + "</option>").join("")
+    + '</select><select id="usort">'
+    + '<option value="price">' + T.sortPrice + '</option><option value="dps">' + T.sortDps + "</option>"
+    + '<option value="total">' + T.sortTotal + '</option><option value="name">' + T.sortName + "</option>"
+    + "</select></div>"
+    + '<div class="controls"><div class="chips" id="utier">'
+    + DATA.tierOrder.map(t => '<button class="chip" data-t="' + t + '" aria-pressed="' + uState.tier.has(t) + '">' + T.tiers[t] + "</button>").join("")
+    + '</div><div class="chips" id="urar">'
+    + DATA.rarityOrder.map(r => '<button class="chip" data-r="' + r + '" aria-pressed="' + uState.rar.has(r) + '">' + r + "</button>").join("")
+    + '</div></div><p class="resultline" id="ures"></p><div class="grid" id="ugrid"></div>'
+    + '<p class="empty" id="uempty" hidden>' + T.nothing + "</p></div>";
+}
+
+function renderUnits(){
+  const q = uState.q.trim().toLowerCase();
+  let list = U.filter(u => {
+    if(uState.rar.size && !uState.rar.has(u.rarity)) return false;
+    if(uState.tier.size && !uState.tier.has(u.tier)) return false;
+    if(uState.type && u.type !== uState.type) return false;
+    if(q && (u.name + " " + u.type).toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  });
+  const s = uState.sort;
+  list = list.slice().sort((a, b) =>
+    s === "name" ? a.name.localeCompare(b.name, "en")
+    : s === "dps" ? (b.maxDps || 0) - (a.maxDps || 0)
+    : s === "total" ? a.totalCost - b.totalCost
+    : a.price - b.price);
+  document.getElementById("ugrid").innerHTML = list.map(unitCard).join("");
+  document.getElementById("uempty").hidden = list.length > 0;
+  document.getElementById("ures").textContent = T.shown(list.length, U.length);
+}
+
+const STAT_LABEL = () => ({ Damage: T.thDmg, Cooldown: T.thCd, Range: T.thRange, FarmCash: T.thFarm });
+const STAT_LOWER_BETTER = { Cooldown: true };
+const STAT_HAS_DPS = keys => keys.indexOf("Damage") !== -1 && keys.indexOf("Cooldown") !== -1;
+
+function upgradeTable(u){
+  if(!u.upgrades.length) return '<div class="note">' + T.noUpgrades + "</div>";
+  const keys = u.statKeys && u.statKeys.length ? u.statKeys : ["Damage", "Cooldown", "Range"];
+  const withDps = STAT_HAS_DPS(keys);
+  const labels = STAT_LABEL();
+  const prev = {};
+  keys.forEach(k => { prev[k] = null; });
+  let run = 0;
+  const rows = u.upgrades.map((up, i) => {
+    run += up.price;
+    const dps = withDps && up.stats.Damage && up.stats.Cooldown ? up.stats.Damage / up.stats.Cooldown : null;
+    const cells = keys.map(k => {
+      const v = up.stats[k];
+      const p = prev[k];
+      let delta = "";
+      if(v != null && p != null && v !== p){
+        const better = STAT_LOWER_BETTER[k] ? v < p : v > p;
+        if(better) delta = ' <b style="color:var(--t-start)">' + (v > p ? "+" : "") + fmt2(v - p) + "</b>";
+      }
+      prev[k] = v;
+      return '<td class="num">' + fmt2(v) + delta + "</td>";
+    }).join("");
+    return "<tr><td>" + (i + 1) + '</td><td class="num">' + fmt(up.price) + "</td>" + cells
+      + (withDps ? '<td class="num">' + fmt2(dps) + "</td>" : "")
+      + '<td class="num">' + fmt(run) + "</td></tr>";
+  }).join("");
+  const headCells = keys.map(k => '<th class="num">' + (labels[k] || k) + "</th>").join("")
+    + (withDps ? '<th class="num">' + T.thDps + "</th>" : "");
+  return '<div class="tablewrap"><table><thead><tr><th>' + T.thLvl + '</th><th class="num">' + T.thPrice
+    + "</th>" + headCells + '<th class="num">' + T.thSpent + "</th></tr></thead>"
+    + "<tbody>" + rows + "</tbody>"
+    + "<tfoot><tr><td>" + T.thTotal + '</td><td class="num">' + fmt(u.upCost)
+    + '</td><td colspan="' + (keys.length + (withDps ? 1 : 0)) + '"></td>'
+    + '<td class="num">' + fmt(u.totalCost) + "</td></tr></tfoot></table></div>";
+}
+
+function statTile(k, v, base){
+  return '<div class="stat"><div class="k">' + k + '</div><div class="v">' + v + "</div>"
+    + (base ? '<div class="d">' + base + "</div>" : "") + "</div>";
+}
+
+function unitView(name){
+  const u = byName[name];
+  if(!u) return '<div class="view"><p class="empty">' + T.nothing + "</p></div>";
+  const boost = u.customText && u.customValue != null;
+  const inBoxes = BOXES.filter(b => b.drops.some(d => d.name === u.name)).map(b => b.name);
+  const inSummon = [];
+  DATA.summons.forEach(s => {
+    s.chances.forEach(r => { if(r.units.indexOf(u.name) !== -1) inSummon.push(s.name + " · " + r.rarity); });
+    Object.keys(s.extraPools).forEach(r => { if(s.extraPools[r].indexOf(u.name) !== -1) inSummon.push(s.name + " · " + r); });
+  });
+
+  let tiles = "";
+  if(u.dmgShown && u.dmg != null) tiles += statTile(T.sDamage, fmt(u.maxDmg != null ? u.maxDmg : u.dmg), u.dmg !== u.maxDmg ? T.base + fmt(u.dmg) : "");
+  if(u.cdShown && u.cd != null) tiles += statTile(T.sCooldown, fmt2(u.maxCd != null ? u.maxCd : u.cd) + T.sec, u.cd !== u.maxCd ? T.base + fmt2(u.cd) + T.sec : "");
+  if(u.range != null) tiles += statTile(T.sRange, fmt2(u.maxRange != null ? u.maxRange : u.range), u.range !== u.maxRange ? T.base + fmt2(u.range) : "");
+  if(u.dpsShown && u.maxDps) tiles += statTile(T.sDps, fmt2(u.maxDps), u.dps !== u.maxDps ? T.base + fmt2(u.dps) : "");
+  if(boost) tiles += statTile(esc(u.customText), "×" + u.customMax, T.base + "×" + u.customValue);
+  tiles += statTile(T.sPlace, CASH + fmt(u.price), T.maxUpgraded + fmt(u.totalCost));
+
+  return '<div class="view"><a class="back" href="#/units">' + T.backUnits + "</a>"
+    + '<div class="detail-head">' + iconTag(u.icon) + "<h2>" + esc(u.name) + "</h2>"
+    + '<div class="tags"><span class="tag rar" style="background:' + rc(u.rarity) + '">' + esc(u.rarity) + "</span>"
+    + '<span class="tag tier-' + u.tier + '">' + T.tiers[u.tier] + "</span>"
+    + '<span class="tag">' + esc(u.type) + "</span>"
+    + (u.premium ? '<span class="tag">' + T.tagPremium + "</span>" : "")
+    + (u.hidden ? '<span class="tag">' + T.tagHidden + "</span>" : "")
+    + "</div></div>"
+    + '<div class="panel"><h3>' + T.pStats + '</h3><div class="stats">' + tiles + "</div></div>"
+    + '<div class="panel"><h3>' + T.pUpgrades + "</h3>" + upgradeTable(u) + "</div>"
+    + '<div class="panel"><h3>' + T.pMisc + '</h3><div class="kvlist">'
+    + '<div class="kv"><span>' + T.kLimit + "</span><span>" + (u.maxPlace != null ? u.maxPlace + T.pcs : T.vNoLimit) + "</span></div>"
+    + '<div class="kv"><span>' + T.kFromSummon + "</span><span>"
+      + (u.summonable === false ? T.vNo : (inSummon.length ? T.vYes : T.vUnknown)) + "</span></div>"
+    + '<div class="kv"><span>' + T.kPools + "</span><span>" + (inSummon.length ? esc(inSummon.join(", ")) : T.dash) + "</span></div>"
+    + '<div class="kv"><span>' + T.kBoxes + "</span><span>" + (inBoxes.length ? esc(inBoxes.join(", ")) : T.dash) + "</span></div>"
+    + "</div></div></div>";
+}
+
+/* ========== ЯЩИКИ ========== */
+const cState = { q: "", showOff: false };
+
+function boxCard(b, i){
+  const top = b.drops[b.drops.length - 1];
+  const stateTag = b.afk ? '<span class="tag" style="color:var(--t-start);border-color:currentColor;background:transparent">' + T.tagAfk + "</span>"
+    : (b.sources.length ? '<span class="tag" style="color:var(--accent);border-color:currentColor;background:transparent">' + T.tagMerchant + "</span>"
+    : (b.enabled ? "" : '<span class="tag">' + T.unavailable + "</span>"));
+  const priceLine = b.afk ? T.tagAfk
+    : (b.enabled && b.price != null) ? fmt(b.price) + " " + cur(b.currency)
+    : (b.sources.length ? fmt(b.sources[0].price) + " " + cur(b.sources[0].cur)
+    : (b.price != null ? fmt(b.price) + " " + cur(b.currency) : T.atMerchant));
+  return '<button class="card" style="--c:' + rc(b.tier) + ";animation-delay:" + Math.min(i, 24) * 18
+    + 'ms" data-box="' + esc(b.name) + '"><h3>' + iconTag(b.icon) + "<span>" + esc(b.name) + "</span></h3>"
+    + '<div class="meta"><span class="tag rar" style="background:' + rc(b.tier) + '">' + esc(b.tier || T.dash) + "</span>"
+    + '<span class="tag">' + b.drops.length + T.positions + "</span>" + stateTag + "</div>"
+    + '<div class="foot"><span class="price">' + priceLine + "</span>"
+    + '<span class="dps">' + T.rarest + pct(top.chance) + "</span></div></button>";
+}
+
+function cratesView(){
+  return '<div class="view"><div class="controls">'
+    + '<input id="cq" type="search" placeholder="' + T.searchBoxes + '" value="' + esc(cState.q) + '" autocomplete="off">'
+    + '<button class="chip" id="coff" aria-pressed="' + cState.showOff + '">' + T.showDisabled + "</button></div>"
+    + '<p class="resultline" id="cres"></p><div class="grid boxes" id="cgrid"></div>'
+    + '<p class="empty" id="cempty" hidden>' + T.nothing + "</p>"
+    + '<h2 class="sec">' + T.secSummons + '</h2><p class="secnote">' + T.summonNote + "</p>"
+    + '<div class="grid boxes">' + DATA.summons.map(bannerPanel).join("") + "</div>"
+    + '<h2 class="sec">' + T.secPity + '</h2><div class="grid boxes">' + pityPanels() + "</div></div>";
+}
+
+function renderCrates(){
+  const q = cState.q.trim().toLowerCase();
+  const list = BOXES.filter(b => {
+    if(!cState.showOff && !b.obtainable) return false;
+    if(!q) return true;
+    if(b.name.toLowerCase().indexOf(q) !== -1) return true;
+    return b.drops.some(d => d.name.toLowerCase().indexOf(q) !== -1);
+  });
+  document.getElementById("cgrid").innerHTML = list.map(boxCard).join("");
+  document.getElementById("cempty").hidden = list.length > 0;
+  document.getElementById("cres").textContent = T.shown(list.length, BOXES.length);
+}
+
+function dropRow(d){
+  const r = d.rarity || null;
+  const label = r ? r : (d.type && d.type !== "Tower" ? T.currency : T.dash);
+  const isCur = d.type && d.type !== "Tower";
+  const nm = isCur ? cur(d.name) + " ×" + d.amount : d.name;
+  const ic = isCur ? curIcon(d.name) : (byName[d.name] ? iconTag(byName[d.name].icon) : (boxByName[d.name] ? iconTag(boxByName[d.name].icon) : ""));
+  const clickable = byName[d.name] ? ' data-unit="' + esc(d.name) + '" style="cursor:pointer"' : "";
+  return '<li class="drop"' + clickable + '><span class="stripe" style="background:' + rc(r) + '"></span>'
+    + '<span class="dname"><span class="n">' + ic + esc(nm) + "</span>"
+    + '<span class="r" style="color:' + rc(r) + '">' + esc(label) + "</span></span>"
+    + '<span class="dnum"><span class="pct" style="color:' + rc(r) + '">' + pct(d.chance) + "</span>"
+    + '<span class="odds">' + odds(d.chance) + "</span></span></li>";
+}
+
+function boxView(name){
+  const b = boxByName[name];
+  if(!b) return '<div class="view"><p class="empty">' + T.nothing + "</p></div>";
+  const src = [];
+  if(b.afk) src.push('<div class="kv"><span>' + T.kSource + "</span><span>" + T.afkSource + "</span></div>");
+  b.sources.forEach(s => src.push('<div class="kv"><span>' + (T.src[s.key] || s.key) + "</span><span>" + fmt(s.price) + " " + cur(s.cur) + "</span></div>"));
+  if(b.price != null) src.push('<div class="kv"><span>' + T.shopPrice + "</span><span>"
+    + fmt(b.price) + " " + cur(b.currency) + "</span></div>");
+  if(!b.afk && !b.sources.length) src.push('<div class="kv"><span>' + T.kState + "</span><span>"
+    + (b.enabled ? T.enabled : T.unavailable) + "</span></div>");
+  src.push('<div class="kv"><span>' + T.kInside + "</span><span>" + b.drops.length + "</span></div>");
+  const warn = Math.abs(b.sum - 100) > 0.02;
+  return '<div class="view"><a class="back" href="#/crates">' + T.backBoxes + "</a>"
+    + '<div class="detail-head">' + iconTag(b.icon) + "<h2>" + esc(b.name) + "</h2>"
+    + '<div class="tags"><span class="tag rar" style="background:' + rc(b.tier) + '">' + esc(b.tier || T.dash) + "</span>"
+    + (b.afk ? '<span class="tag" style="color:var(--t-start);border-color:currentColor;background:transparent">' + T.tagAfk + "</span>"
+    : (b.sources.length ? '<span class="tag" style="color:var(--accent);border-color:currentColor;background:transparent">' + T.tagMerchant + "</span>" : ""))
+    + "</div></div>"
+    + '<div class="panel"><h3>' + T.pGeneral + '</h3><div class="kvlist">' + src.join("") + "</div></div>"
+    + '<div class="panel"><h3>' + T.pDrops + '</h3><ul class="drops">' + b.drops.map(dropRow).join("") + "</ul>"
+    + '<div class="note' + (warn ? " warn" : "") + '">' + T.sumChances(+b.sum.toFixed(4)) + "</div></div></div>";
+}
+
+function bannerPanel(s){
+  const rows = s.chances.map(r => poolRow(r.rarity, r.chance, r.units, r.boosted)).join("")
+    + Object.keys(s.extraPools).map(r => poolRow(r, null, s.extraPools[r], null)).join("");
+  const total = s.chances.reduce((a, b) => a + b.chance, 0);
+  return '<div class="panel" style="margin-top:0"><h3>' + esc(s.name) + " Summon · ×1 " + s.prices.x1
+    + " / ×10 " + s.prices.x10 + " / ×50 " + s.prices.x50 + " " + cur(s.currency) + "</h3>"
+    + rows + '<div class="note' + (Math.abs(total - 100) > 0.02 ? " warn" : "") + '">'
+    + T.sumByRarity(+total.toFixed(5)) + "</div></div>";
+}
+
+function poolRow(rarity, chance, units, boosted){
+  const num = chance == null ? '<span class="odds">' + T.noChance + "</span>"
+    : '<span class="pct" style="color:' + rc(rarity) + '">' + pct(chance) + '</span><span class="odds">' + odds(chance) + "</span>";
+  return '<div class="drop"><span class="stripe" style="background:' + rc(rarity) + '"></span>'
+    + '<span class="dname"><span class="n" style="font-weight:600;color:' + rc(rarity) + '">' + esc(rarity) + "</span></span>"
+    + '<span class="dnum">' + num + "</span></div>"
+    + '<div class="pool">' + units.map(u => '<span class="unitchip ' + (u === boosted ? "boost" : "")
+        + '" data-unit="' + esc(u) + '" style="cursor:pointer">' + (byName[u] ? iconTag(byName[u].icon) : "") + esc(u) + "</span>").join("") + "</div>";
+}
+
+function pityPanels(){
+  const p = DATA.summons.map(s =>
+    '<div class="panel" style="margin-top:0"><h3>' + T.pityOf + esc(s.name) + "</h3>"
+    + '<div class="tablewrap"><table><thead><tr><th>' + T.thRarity + '</th><th class="num">' + T.thSummons
+    + "</th></tr></thead><tbody>"
+    + Object.keys(s.pity).map(r => '<tr><td style="color:' + rc(r) + '">' + esc(r) + '</td><td class="num">'
+      + fmt(s.pity[r]) + "</td></tr>").join("") + "</tbody></table></div></div>").join("");
+  return p + '<div class="panel" style="margin-top:0"><h3>' + T.pModifiers + "</h3>"
+    + '<div class="tablewrap"><table><thead><tr><th>' + T.thModifier + '</th><th class="num">' + T.thChance
+    + "</th><th>" + T.thEffect + "</th></tr></thead><tbody>"
+    + DATA.modifiers.map(x => "<tr><td><b>" + esc(x.name) + '</b></td><td class="num">' + x.chance
+      + "%</td><td>" + esc(T.mods[x.name] || "") + "</td></tr>").join("") + "</tbody></table></div></div>";
+}
+
+/* ========== КАТКИ ========== */
+const CUR_ORDER = ["Cash", "Gems", "Stars", "Chi", "Sheckles", "Bones", "Cogs", "Suns"];
+const mState = { cur: "", only: false };
+const amountOf = (m, c) => { const x = m.currencies.find(y => y.raw === c); return x ? x.amount : 0; };
+
+// Сводка по каждой награде: сколько режимов её дают и где её больше всего.
+function farmRows(){
+  return CUR_ORDER.map(c => {
+    const src = MODES.filter(m => m.currencies.some(x => x.raw === c))
+      .map(m => ({ name: m.name, amount: m.currencies.find(x => x.raw === c).amount }))
+      .sort((a, b) => b.amount - a.amount);
+    return src.length ? { raw: c, count: src.length, best: src[0] } : null;
+  }).filter(Boolean);
+}
+
+function farmPanel(){
+  return '<div class="panel" style="margin-top:0">'
+    + '<div class="tablewrap"><table><thead><tr><th>' + T.thCurrency + '</th><th class="num">'
+    + T.thSources + "</th><th>" + T.thBest + '</th><th class="num">' + T.thAmount
+    + "</th></tr></thead><tbody>"
+    + farmRows().map(r => "<tr><td><b>" + esc(cur(r.raw)) + '</b></td><td class="num">'
+        + T.sourcesN(r.count) + "</td><td>" + esc(r.best.name) + '</td><td class="num">'
+        + fmt(r.best.amount) + "</td></tr>").join("")
+    + "</tbody></table></div></div>";
+}
+
+function modeCard(m, i, hi, best){
+  const c = m.endless ? "var(--r-Celestial)" : "var(--r-Rare)";
+  const rows = m.currencies.map(x => {
+      const on = hi && x.raw === hi;
+      return '<div class="kv"' + (on ? ' style="background:var(--accent-soft)"' : "") + "><span"
+        + (on ? ' style="color:var(--accent)"' : "") + ">" + esc(cur(x.raw)) + "</span><span"
+        + (on ? ' style="color:var(--accent);font-weight:600"' : "") + ">" + fmt(x.amount) + "</span></div>";
+    }).join("")
+    + m.chests.map(x => '<div class="kv"><span>' + esc(x.name) + "</span><span>" + esc(x.chance) + "</span></div>").join("");
+  return '<div class="card" style="--c:' + c + ";animation-delay:" + Math.min(i, 24) * 18 + 'ms;cursor:default">'
+    + "<h3>" + esc(m.name) + "</h3>"
+    + '<div class="meta"><span class="tag">' + (m.endless ? T.tagEndless : T.tagNormal) + "</span>"
+    + (best ? '<span class="tag tier-start">' + T.tagBest + "</span>" : "") + "</div>"
+    + '<div class="kvlist" style="margin-top:11px;background:transparent;gap:0">' + rows + "</div></div>";
+}
+
+function modesView(){
+  return '<div class="view"><p class="secnote">' + T.modesNote + "</p>"
+    + '<h2 class="sec">' + T.secFarm + '</h2><p class="secnote">' + T.farmNote + "</p>"
+    + farmPanel()
+    + '<div class="controls"><div class="chips" id="curchips">'
+    + '<button class="chip" data-c="" aria-pressed="' + (mState.cur === "") + '">' + T.allRewards + "</button>"
+    + CUR_ORDER.map(c => '<button class="chip" data-c="' + c + '" aria-pressed="' + (mState.cur === c) + '">'
+        + esc(cur(c)) + "</button>").join("")
+    + '<button class="chip" id="curonly" aria-pressed="' + mState.only + '">' + T.onlyWith + "</button>"
+    + '</div></div><div id="modesBody"></div></div>';
+}
+
+function renderModes(){
+  const hi = mState.cur;
+  let list = MODES.slice();
+  if(hi){
+    // Сортируем ВСЕ карты по выбранной награде; режимы без неё уходят в хвост,
+    // а прячутся только если включён отдельный тумблер.
+    if(mState.only) list = list.filter(m => amountOf(m, hi) > 0);
+    list.sort((a, b) => (amountOf(b, hi) - amountOf(a, hi)) || a.name.localeCompare(b.name, "en"));
+  }
+  const normal = list.filter(m => !m.endless), endless = list.filter(m => m.endless);
+  const bestName = (hi && list.length && amountOf(list[0], hi) > 0) ? list[0].name : null;
+  const block = (arr, title, note) => !arr.length ? "" :
+    '<h2 class="sec">' + title + '</h2><p class="secnote">' + note + "</p>"
+    + '<div class="grid modes">' + arr.map((m, i) => modeCard(m, i, hi, m.name === bestName)).join("") + "</div>";
+  document.getElementById("modesBody").innerHTML =
+    block(normal, T.secNormal, T.normalNote(normal.length)) + block(endless, T.secEndless, T.endlessNote(endless.length))
+    || '<p class="empty">' + T.nothing + "</p>";
+}
+
+function bindModes(){
+  document.getElementById("curchips").addEventListener("click", e => {
+    const b = e.target.closest(".chip");
+    if(!b) return;
+    if(b.id === "curonly"){
+      mState.only = !mState.only;
+      b.setAttribute("aria-pressed", String(mState.only));
+    } else {
+      mState.cur = b.dataset.c;
+      document.querySelectorAll("#curchips .chip[data-c]").forEach(x =>
+        x.setAttribute("aria-pressed", String(x.dataset.c === mState.cur)));
+    }
+    renderModes();
+  });
+}
+
+/* ========== КРАФТЫ ========== */
+const RECIPES = DATA.recipes || [], ITEMS = DATA.items || [];
+const itemByName = {}; ITEMS.forEach(it => itemByName[it.name] = it);
+const kState = { q: "" };
+
+function kvRow(left, right, accent){
+  return '<div class="kv"' + (accent ? ' style="background:var(--accent-soft)"' : "") + "><span"
+    + (accent ? ' style="color:var(--accent)"' : "") + ">" + left + "</span><span"
+    + (accent ? ' style="color:var(--accent);font-weight:600"' : "") + ">" + right + "</span></div>";
+}
+
+function recipeCard(r, i){
+  const bad = r.unknownIng.length > 0;
+  const ing = r.ingredients.map(function(x){
+    const missing = r.unknownIng.indexOf(x.name) !== -1;
+    const it = itemByName[x.name];
+    return kvRow((it ? iconTag(it.icon) : "") + esc(x.name)
+      + (missing ? ' <span class="tag">' + T.unknownIng + "</span>" : ""), "\u00d7" + x.count);
+  }).join("");
+  const rw = r.reward;
+  const rewardName = rw.type === "Currency" ? cur(rw.name) : rw.name;
+  const box = boxByName[rw.name];
+  const reward = kvRow(T.gives + " \u00b7 " + esc(rewardName), rw.amount ? "\u00d7" + fmt(rw.amount) : "", true);
+  return '<div class="card" style="--c:' + (bad ? "var(--muted)" : "var(--r-Legendary)")
+    + ";animation-delay:" + Math.min(i, 24) * 18 + "ms;cursor:" + (box ? "pointer" : "default") + '"'
+    + (box ? ' data-box="' + esc(rw.name) + '"' : "") + ">"
+    + "<h3>" + (box ? iconTag(box.icon) : "") + "<span>" + esc(r.name) + "</span></h3>"
+    + '<div class="meta"><span class="tag">' + T.needFor + " " + r.ingredients.length + "</span>"
+    + '<span class="tag">' + esc(rewardName) + "</span></div>"
+    + '<div class="kvlist" style="margin-top:11px;background:transparent;gap:0">' + ing + reward + "</div>"
+    + "</div>";
+}
+
+function itemCard(it, i){
+  const rows = it.drops.map(function(d){ return kvRow(esc(d.map), d.chance + "%"); }).join("")
+    + it.sellers.map(function(sl){ return kvRow(esc(T.src[sl.key] || sl.key), fmt(sl.price) + " " + esc(cur(sl.cur))); }).join("");
+  return '<div class="card" style="--c:' + rc(it.rarity) + ";animation-delay:" + Math.min(i, 24) * 18
+    + 'ms;cursor:default"><h3>' + iconTag(it.icon) + "<span>" + esc(it.name) + "</span></h3>"
+    + '<div class="meta"><span class="tag rar" style="background:' + rc(it.rarity) + '">' + esc(it.rarity) + "</span></div>"
+    + (it.desc ? '<p style="margin:9px 0 0;font-size:13px;color:var(--ink-2)">' + esc(it.desc) + "</p>" : "")
+    + '<div class="kvlist" style="margin-top:11px;background:transparent;gap:0">'
+    + (rows || kvRow(T.noSource, "")) + "</div></div>";
+}
+
+function craftsView(){
+  return '<div class="view"><p class="secnote">' + T.craftNote + "</p>"
+    + '<div class="controls"><input id="kq" type="search" placeholder="' + T.searchCrafts
+    + '" value="' + esc(kState.q) + '" autocomplete="off"></div>'
+    + '<p class="resultline" id="kres"></p><div id="craftsBody"></div></div>';
+}
+
+function renderCrafts(){
+  const q = kState.q.trim().toLowerCase();
+  const hit = function(t){ return !q || String(t || "").toLowerCase().indexOf(q) !== -1; };
+  const rec = RECIPES.filter(function(r){
+    return hit(r.name) || hit(r.reward.name) || r.ingredients.some(function(x){ return hit(x.name); });
+  });
+  const its = ITEMS.filter(function(it){
+    return hit(it.name) || hit(it.desc) || it.drops.some(function(d){ return hit(d.map); });
+  });
+  const block = function(arr, title, fn, note){
+    return !arr.length ? "" : '<h2 class="sec">' + title + "</h2>"
+      + (note ? '<p class="secnote">' + note + "</p>" : "")
+      + '<div class="grid boxes">' + arr.map(fn).join("") + "</div>";
+  };
+  const anyBad = rec.some(function(r){ return r.unknownIng.length > 0; });
+  document.getElementById("craftsBody").innerHTML =
+    (block(rec, T.secRecipes, recipeCard, anyBad ? T.unknownNote : "") + block(its, T.secItems, itemCard))
+    || '<p class="empty">' + T.nothing + "</p>";
+  document.getElementById("kres").textContent =
+    T.nRecipes(rec.length, RECIPES.length) + " \u00b7 " + T.nItems(its.length, ITEMS.length);
+}
+
+function bindCrafts(){
+  document.getElementById("kq").addEventListener("input", function(e){ kState.q = e.target.value; renderCrafts(); });
+}
+
+/* ========== ПРАЙСЛИСТ ========== */
+function valueView(){
+  return '<div class="view">'
+    + '<div class="panel" style="margin-top:24px"><div style="padding:64px 20px; text-align:center">'
+    + '<h2 style="font-size:clamp(28px,6vw,44px); color:var(--accent)">' + esc(T.valueSoon) + "</h2>"
+    + "</div></div></div>";
+}
+
+/* ========== РОУТЕР ========== */
+const app = document.getElementById("app");
+
+function chrome(){
+  document.documentElement.lang = LANG;
+  document.title = T.docTitle;
+  document.getElementById("brand").textContent = T.brand;
+  document.getElementById("tagline").textContent = T.tagline;
+  document.getElementById("intro").textContent = T.intro;
+  document.getElementById("footnote").textContent = T.footnote;
+  document.getElementById("tgtext").innerHTML = T.tgText + " <b>@L1meYT</b>";
+  const labels = { units: T.tabUnits, crates: T.tabCrates, modes: T.tabModes, crafts: T.tabCrafts, value: T.tabValue };
+  document.querySelectorAll("#tabs a").forEach(a => a.querySelector(".lbl").textContent = labels[a.dataset.v]);
+  document.getElementById("n-units").textContent = U.length;
+  document.getElementById("n-crates").textContent = BOXES.length;
+  document.getElementById("n-modes").textContent = MODES.length;
+  document.getElementById("n-crafts").textContent = RECIPES.length + ITEMS.length;
+  document.querySelectorAll("#langswitch button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.lang === LANG)));
+
+  const box = document.getElementById("updated");
+  const d = new Date(BUILD_TS);
+  if(isNaN(d)){ box.hidden = true; }
+  else {
+    const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+    const rel = days <= 0 ? T.today : (days === 1 ? T.yesterday : T.daysAgo(days));
+    box.innerHTML = '<span class="dot"></span>' + T.updated + " <b>"
+      + d.toLocaleDateString(T.locale, { day: "2-digit", month: "2-digit", year: "numeric" })
+      + "</b> · " + rel;
+    box.title = d.toLocaleString(T.locale);
+  }
+}
+
+function route(keepScroll){
+  const h = location.hash.replace(/^#\/?/, "") || "units";
+  const parts = h.split("/").map(decodeURIComponent);
+  let tab = "units";
+  if(parts[0] === "unit"){ app.innerHTML = unitView(parts[1]); }
+  else if(parts[0] === "box"){ app.innerHTML = boxView(parts[1]); tab = "crates"; }
+  else if(parts[0] === "crates"){ app.innerHTML = cratesView(); renderCrates(); bindCrates(); tab = "crates"; }
+  else if(parts[0] === "modes"){ app.innerHTML = modesView(); renderModes(); bindModes(); tab = "modes"; }
+  else if(parts[0] === "crafts"){ app.innerHTML = craftsView(); renderCrafts(); bindCrafts(); tab = "crafts"; }
+  else if(parts[0] === "value"){ app.innerHTML = valueView(); tab = "value"; }
+  else { app.innerHTML = unitsView(); renderUnits(); bindUnits(); }
+  document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("on", a.dataset.v === tab));
+  if(!keepScroll) window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function bindUnits(){
+  document.getElementById("uq").addEventListener("input", e => { uState.q = e.target.value; renderUnits(); });
+  document.getElementById("utype").addEventListener("change", e => { uState.type = e.target.value; renderUnits(); });
+  const sortSel = document.getElementById("usort");
+  sortSel.value = uState.sort;
+  sortSel.addEventListener("change", e => { uState.sort = e.target.value; renderUnits(); });
+  document.getElementById("utier").addEventListener("click", e => toggleChip(e, uState.tier, "t"));
+  document.getElementById("urar").addEventListener("click", e => toggleChip(e, uState.rar, "r"));
+}
+
+function toggleChip(e, set, key){
+  const b = e.target.closest(".chip");
+  if(!b) return;
+  const v = b.dataset[key];
+  if(set.has(v)){ set.delete(v); b.setAttribute("aria-pressed", "false"); }
+  else { set.add(v); b.setAttribute("aria-pressed", "true"); }
+  renderUnits();
+}
+
+function bindCrates(){
+  document.getElementById("cq").addEventListener("input", e => { cState.q = e.target.value; renderCrates(); });
+  document.getElementById("coff").addEventListener("click", e => {
+    cState.showOff = !cState.showOff;
+    e.currentTarget.setAttribute("aria-pressed", String(cState.showOff));
+    renderCrates();
+  });
+}
+
+document.getElementById("langswitch").addEventListener("click", e => {
+  const b = e.target.closest("button[data-lang]");
+  if(!b || b.dataset.lang === LANG) return;
+  LANG = b.dataset.lang;
+  T = I18N[LANG];
+  try { localStorage.setItem("slopcodex-lang", LANG); } catch(err){}
+  chrome();
+  route(true);
+});
+
+app.addEventListener("click", e => {
+  const box = e.target.closest("[data-box]");
+  if(box){ location.hash = "#/box/" + encodeURIComponent(box.dataset.box); return; }
+  const unit = e.target.closest("[data-unit]");
+  if(unit && byName[unit.dataset.unit]){ location.hash = "#/unit/" + encodeURIComponent(unit.dataset.unit); }
+});
+
+window.addEventListener("hashchange", () => route(false));
+chrome();
+route(false);
+</script>
