@@ -196,6 +196,7 @@ for name, r in MODES.items():
     cur_list.sort(key=lambda x: -x["amount"])
     chest_list.sort(key=lambda x: -float(x["chance"].rstrip("%")))
     modes.append({"name": name, "endless": name.endswith("Endless"),
+                  "icon": ICONS["locations"].get(name),
                   "currencies": cur_list, "chests": chest_list})
 modes.sort(key=lambda mo: (mo["endless"],
            -sum(c["amount"] for c in mo["currencies"] if c["raw"] == "Cash"), mo["name"]))

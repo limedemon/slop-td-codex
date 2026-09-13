@@ -46,12 +46,19 @@ result = {
     "units": process(os.path.join(SRC, "units"), "u"),
     "items": process(os.path.join(SRC, "items"), "b"),
     "currency": process(os.path.join(SRC, "currency"), "c"),
+    "locations": process(os.path.join(SRC, "locations"), "l"),
 }
+
+# Windows не пускает двоеточие в имя файла, поэтому "51lly n00b :3" при
+# сортировке иконок сохранился как "51lly n00b 3.png" — без алиаса юнит
+# терял иконку при каждой пересборке карты.
+if "51lly n00b 3" in result["units"]:
+    result["units"]["51lly n00b :3"] = result["units"].pop("51lly n00b 3")
 json.dump(result, open("icon_map.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 total_size = sum(
     os.path.getsize(os.path.join(root, f))
     for root, _, files in os.walk(OUT) for f in files
 )
-print("units", len(result["units"]), "items", len(result["items"]), "currency", len(result["currency"]))
+print("units", len(result["units"]), "items", len(result["items"]), "currency", len(result["currency"]), "locations", len(result["locations"]))
 print("общий размер icons/:", round(total_size / 1024 / 1024, 2), "МБ")

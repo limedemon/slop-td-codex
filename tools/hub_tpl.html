@@ -732,7 +732,7 @@ function modeCard(m, i, hi, best){
     }).join("")
     + m.chests.map(x => '<div class="kv"><span>' + esc(x.name) + "</span><span>" + esc(x.chance) + "</span></div>").join("");
   return '<div class="card" style="--c:' + c + ";animation-delay:" + Math.min(i, 24) * 18 + 'ms;cursor:default">'
-    + "<h3>" + esc(m.name) + "</h3>"
+    + "<h3>" + iconTag(m.icon) + "<span>" + esc(m.name) + "</span></h3>"
     + '<div class="meta"><span class="tag">' + (m.endless ? T.tagEndless : T.tagNormal) + "</span>"
     + (best ? '<span class="tag tier-start">' + T.tagBest + "</span>" : "") + "</div>"
     + '<div class="kvlist" style="margin-top:11px;background:transparent;gap:0">' + rows + "</div></div>";
