@@ -295,6 +295,8 @@ const U = DATA.units, MODES = DATA.modes;
 const BOXES = DATA.crates.concat(DATA.chests);
 const byName = {}; U.forEach(u => byName[u.name] = u);
 const boxByName = {}; BOXES.forEach(b => boxByName[b.name] = b);
+const PRICELIST = [{"name":"Skibidi Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Cat","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Pog Cat","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Skibidi Bucket","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Isaac2","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Dog","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Glistening Skibidi","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Pirate Cat","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Alien Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Candy Blossom","valueKind":"num","valueNum":400.0,"demand":"6/10","demandNum":6,"stability":"stable"},{"name":"Devil tung tung tung sahur","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Summer Maxwell","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Camera Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Carrot","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Freddy Trashcan","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Scout Egg Noob","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Scout Egg","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Moon Blossom","valueKind":"num","valueNum":1900.0,"demand":"9/10","demandNum":9,"stability":"stable"},{"name":"Evil tung tung tung sahur","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Greenbean","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Large Camera Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Astronaut Cat","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Guest","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Noobini Cakenini","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Noob","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Guest 666","valueKind":"num","valueNum":2750.0,"demand":"4/10","demandNum":4,"stability":"slow_rising"},{"name":"Mango Trollface","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Bubble","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Alarm Clock Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Alien Gubby","valueKind":"num","valueNum":300.0,"demand":"4/10","demandNum":4,"stability":"unstable"},{"name":"Corn","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Diamond Cat","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Pot Hotspot","valueKind":"num","valueNum":10.0,"demand":"0/10","demandNum":0,"stability":"stable"},{"name":"Zooble","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Tung Tung Tung Sahur","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Alien Noob","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Glistening Noob","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Glistening Tung Tung","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Noobini Pizzanini","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Retro Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Shrimpo","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Dragon","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Shelly","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"SummerE9","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Troll Slap","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Tung Tung Midas","valueKind":"num","valueNum":50.0,"demand":"4/10","demandNum":4,"stability":"stable"},{"name":"Astro","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Elliot","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Steampunk Crocodile","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Verity","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Cyborg Cat","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Retro Camera Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Builderman","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Pomni","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"1x1x1x1","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Summer Auditory","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Banana","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Afterwind","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Gubby","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Shedletsky","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Large Clock Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Rocket Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Sopper","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Guest1337","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Milestone Elliot","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Party Toilet","valueKind":"num","valueNum":1500.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Patriotic Camera Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"KreekCraft","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Two Time","valueKind":"num","valueNum":20.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Alien Elliot","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Godly Sprinkler","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Maxwell","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Sorry Robloxian","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Chance","valueKind":"num","valueNum":77.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Gangle","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Jane Doe","valueKind":"num","valueNum":120.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Pepper","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Summer Onest","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Glistening Freddy","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Golden Freddy Trashcan","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Cat Magician","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"DJ Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Lazy Isaac","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Noobini Sleepini","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"TV Woman","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Titan TV Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Retro Builderman","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"John Doe","valueKind":"num","valueNum":90.0,"demand":"4/10","demandNum":4,"stability":"stable"},{"name":"Milestone Builderman","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Alien 1x1x1x1","valueKind":"num","valueNum":500.0,"demand":"6/10","demandNum":6,"stability":"stable"},{"name":"Admin Lucky Block","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Mythic Lucky Block","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Titan Camera Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Onest","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Milestone Guest1337","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Happy Computer","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Alien Chance","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Milestone Shedletsky","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Vova2bb_t","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Milestone Chance","valueKind":"num","valueNum":87.0,"demand":"4/10","demandNum":4,"stability":"stable"},{"name":"Azure","valueKind":"num","valueNum":55.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Jax","valueKind":"num","valueNum":30.0,"demand":"2/10","demandNum":2,"stability":"stable"},{"name":"Upgraded Large Camera Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Abstracted","valueKind":"num","valueNum":125.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Doom Bringer","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Cargo Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Pirate TV Man","valueKind":"num","valueNum":150.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Patriotic TV Man","valueKind":"oc","valueNum":null,"demand":"4/10","demandNum":4,"stability":"stable"},{"name":"Aether Fruit","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Buff Mutant Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"King Pepper","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Mafia Toilet","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Minigun Toilet","valueKind":"num","valueNum":100.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Astro Large TV Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Astronaut TV Man","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Dandy","valueKind":"num","valueNum":40.0,"demand":"2/10","demandNum":2,"stability":"stable"},{"name":"Forsaken Jane Doe","valueKind":"num","valueNum":170.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Mechanical Spider","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Ember Lily","valueKind":"num","valueNum":100.0,"demand":"6/10","demandNum":6,"stability":"stable"},{"name":"Golden Slop Man","valueKind":"num","valueNum":200.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Upgraded Slop Man","valueKind":"num","valueNum":2500.0,"demand":"5?/10","demandNum":5,"stability":"stable"},{"name":"Party Cat","valueKind":"range","valueNum":12500.0,"demand":"5/10","demandNum":5,"stability":"stable","valueRange":[10000.0,15000.0]},{"name":"Flowergirl Afterwind","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"Laser Toilet","valueKind":"num","valueNum":200.0,"demand":"6/10","demandNum":6,"stability":"unstable"},{"name":"Noli","valueKind":"num","valueNum":70.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Tung Tung God","valueKind":"num","valueNum":250.0,"demand":"5/10","demandNum":5,"stability":"unstable"},{"name":"Sahur Statue","valueKind":"num","valueNum":90.0,"demand":"6/10","demandNum":6,"stability":"stable"},{"name":"Gubbity","valueKind":"num","valueNum":120.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Drakobloxxer","valueKind":"num","valueNum":2300.0,"demand":null,"demandNum":null,"stability":"crashing"},{"name":"Titan Clock Man","valueKind":"num","valueNum":250.0,"demand":"8/10","demandNum":8,"stability":"stable"},{"name":"IsaacE9","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"51lly n00b :3","valueKind":null,"valueNum":null,"demand":null,"demandNum":null,"stability":null},{"name":"The Ohio Final Boss","valueKind":"num","valueNum":4100.0,"demand":"5/10","demandNum":5,"stability":"slow_falling"},{"name":"Blimp Dragon","valueKind":"num","valueNum":150.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Future Large Clock Man","valueKind":"num","valueNum":300.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Secret Lucky Block","valueKind":"num","valueNum":100.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Caine","valueKind":"num","valueNum":4300.0,"demand":"6/10","demandNum":6,"stability":"slow_falling"},{"name":"Huge Cyborg Cat","valueKind":"num","valueNum":350.0,"demand":"4/10","demandNum":4,"stability":"stable"},{"name":"1x1x1x1's Teapot","valueKind":"num","valueNum":5250.0,"demand":"4/10","demandNum":4,"stability":"rising"},{"name":"Ban Ban Ban Sahur","valueKind":"num","valueNum":200.0,"demand":"6/10","demandNum":6,"stability":"unstable"},{"name":"Upgraded Titan Camera Man","valueKind":"num","valueNum":100.0,"demand":"6/10","demandNum":6,"stability":"stable"},{"name":"Injured Titan Camera Man","valueKind":"num","valueNum":1400.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Soul Fruit","valueKind":"num","valueNum":5000.0,"demand":"6/10","demandNum":6,"stability":"slow_falling"},{"name":"Graipuss Medussi","valueKind":"num","valueNum":20.0,"demand":"2/10","demandNum":2,"stability":"stable"},{"name":"Slop Man","valueKind":"num","valueNum":40.0,"demand":"3/10","demandNum":3,"stability":"stable"},{"name":"Star Fruit","valueKind":"num","valueNum":5000.0,"demand":"10/10","demandNum":10,"stability":"falling"},{"name":"Upgraded Titan Speakerman","valueKind":"num","valueNum":75.0,"demand":"7/10","demandNum":7,"stability":"stable"},{"name":"Stalker","valueKind":"num","valueNum":450.0,"demand":"7/10","demandNum":7,"stability":"falling"},{"name":"Dragon Cannelloni","valueKind":"num","valueNum":40.0,"demand":"2/10","demandNum":2,"stability":"stable"},{"name":"Poseidon Corgi","valueKind":"num","valueNum":5700.0,"demand":"8/10","demandNum":8,"stability":"slow_falling"},{"name":"Upgraded Titan Clock Man","valueKind":"num","valueNum":9500.0,"demand":"8/10","demandNum":8,"stability":"unstable"},{"name":"Astral Axolotl","valueKind":"num","valueNum":300.0,"demand":"6/10","demandNum":6,"stability":"unstable"},{"name":"Cherry Blossom","valueKind":"num","valueNum":1150.0,"demand":"7/10","demandNum":7,"stability":"stable"},{"name":"Summer Titan Camera Man","valueKind":"num","valueNum":300.0,"demand":"6/10","demandNum":6,"stability":"unstable"},{"name":"King Noobini","valueKind":"num","valueNum":2000.0,"demand":"7/10","demandNum":7,"stability":"crashing"},{"name":"Kinger","valueKind":"num","valueNum":700.0,"demand":"5/10","demandNum":5,"stability":"stable"},{"name":"Orbital Camera","valueKind":"num","valueNum":3000.0,"demand":"7/10","demandNum":7,"stability":"falling"},{"name":"Upgraded Titan TV Man","valueKind":"num","valueNum":8500.0,"demand":"6/10","demandNum":6,"stability":"unstable"},{"name":"G-Toilet","valueKind":"num","valueNum":2100.0,"demand":"6/10","demandNum":6,"stability":"crashing"},{"name":"Titanic Cyborg Cat","valueKind":"num","valueNum":1200.0,"demand":"7/10","demandNum":7,"stability":"stable"},{"name":"Executioner Speaker Man","valueKind":"num","valueNum":1300.0,"demand":"7/10","demandNum":7,"stability":"stable"},{"name":"The Watchman Of Doom","valueKind":"num","valueNum":2500.0,"demand":"10/10","demandNum":10,"stability":"crashing"}];
+const priceByName = {}; PRICELIST.forEach(p => priceByName[p.name] = p);
 
 /* ========== ЛОКАЛИЗАЦИЯ ========== */
 const I18N = {
@@ -335,6 +337,11 @@ const I18N = {
     tagMerchant: "у мерчанта", unavailable: "пока недоступен",
     kSource: "Как получить", shopPrice: "Цена в магазине",
     tabValue: "Прайслист", valueSoon: "Скоро!..",
+    valueNote: "Ручной прайслист сообщества, не данные из самой игры — цены и спрос могут отличаться от реальных сделок. У части юнитов данных пока нет.",
+    valueSortValue: "По цене", valueSortDemand: "По спросу", valueOnlyPriced: "Только с ценой",
+    valueDemandLabel: "Спрос", naText: "N/A",
+    stab: { stable: "Стабильна", rising: "Растёт", slow_rising: "Медленно растёт", falling: "Падает",
+            slow_falling: "Медленно падает", unstable: "Нестабильна", crashing: "Резко падает" },
     positions: " позиций", rarest: "редчайшее: ", atMerchant: "у мерчанта",
     kState: "Состояние", kInside: "Позиций внутри",
     sumChances: c => "сумма шансов " + c + "%",
@@ -372,6 +379,11 @@ const I18N = {
     footnote: "Early, mid and endgame are split by placement price: up to 700, up to 2500, and above. Values match the current version of the game and may change with updates.",
     tabUnits: "Units", tabCrates: "Crates", tabModes: "Matches", tabCrafts: "Crafts",
     tabValue: "Value List", valueSoon: "Soon!..",
+    valueNote: "A hand-kept community price list, not data pulled from the game itself — prices and demand may differ from real trades. Some units have no data yet.",
+    valueSortValue: "By value", valueSortDemand: "By demand", valueOnlyPriced: "Priced only",
+    valueDemandLabel: "Demand", naText: "N/A",
+    stab: { stable: "Stable", rising: "Rising", slow_rising: "Slowly rising", falling: "Falling",
+            slow_falling: "Slowly falling", unstable: "Unstable", crashing: "Crashing" },
     craftNote: "Crafting never hands out a unit directly: a finished recipe pays currency or a chest, and the units come out of that chest. Materials drop from maps and are sold by merchants.",
     secRecipes: "Recipes", secItems: "Materials",
     needFor: "Ingredients", gives: "Gives",
@@ -891,8 +903,92 @@ function bindCrafts(){
 }
 
 /* ========== ПРАЙСЛИСТ ========== */
+const vState = { q: "", rar: new Set(), onlyPriced: false, sort: "value" };
+
+function stabInfo(key){
+  if(!key) return null;
+  const map = {
+    stable: { cls: "", label: T.stab.stable },
+    rising: { cls: "tier-start", label: T.stab.rising },
+    slow_rising: { cls: "tier-start", label: T.stab.slow_rising },
+    falling: { cls: "tier-mid", label: T.stab.falling },
+    slow_falling: { cls: "tier-mid", label: T.stab.slow_falling },
+    unstable: { cls: "tier-end", label: T.stab.unstable },
+    crashing: { cls: "tier-end", label: T.stab.crashing }
+  };
+  return map[key] || null;
+}
+
+function valuePriceHtml(p){
+  if(p.valueKind === "num") return CASH + "<span>" + fmt2(p.valueNum) + "</span>";
+  if(p.valueKind === "range") return CASH + "<span>" + fmt2(p.valueRange[0]) + "\u2013" + fmt2(p.valueRange[1]) + "</span>";
+  if(p.valueKind === "oc") return '<span style="color:var(--accent);font-weight:600">O/C</span>';
+  return '<span style="color:var(--muted)">' + T.naText + "</span>";
+}
+
+function valueCard(p, i){
+  const u = byName[p.name];
+  const stab = stabInfo(p.stability);
+  return '<button class="card" style="--c:' + rc(u.rarity) + ";animation-delay:" + Math.min(i, 24) * 18
+    + 'ms" data-unit="' + esc(p.name) + '"><h3>' + iconTag(u.icon) + "<span>" + esc(p.name) + "</span></h3>"
+    + '<div class="meta"><span class="tag rar" style="background:' + rc(u.rarity) + '">' + esc(u.rarity) + "</span>"
+    + '<span class="tag tier-' + u.tier + '">' + T.tiers[u.tier] + "</span>"
+    + (stab ? '<span class="tag ' + stab.cls + '">' + stab.label + "</span>"
+             : '<span class="tag" style="color:var(--muted)">' + T.naText + "</span>")
+    + "</div>"
+    + '<div class="foot"><span class="price">' + valuePriceHtml(p) + "</span>"
+    + '<span class="dps">' + T.valueDemandLabel + " " + esc(p.demand || T.naText) + "</span></div></button>";
+}
+
 function valueView(){
-  return '<div class="view" style="margin-top:24px">' + soonPanel() + "</div>";
+  return '<div class="view"><p class="secnote">' + T.valueNote + "</p><div class=\"controls\">"
+    + '<input id="vq" type="search" placeholder="' + T.searchUnits + '" value="' + esc(vState.q) + '" autocomplete="off">'
+    + '<select id="vsort">'
+    + '<option value="value">' + T.valueSortValue + '</option><option value="demand">' + T.valueSortDemand + "</option>"
+    + '<option value="name">' + T.sortName + "</option>"
+    + "</select></div>"
+    + '<div class="controls"><div class="chips" id="vrar">'
+    + DATA.rarityOrder.map(r => '<button class="chip" data-r="' + r + '" aria-pressed="' + vState.rar.has(r) + '">' + r + "</button>").join("")
+    + '</div><button class="chip" id="vonly" aria-pressed="' + vState.onlyPriced + '">' + T.valueOnlyPriced + "</button></div>"
+    + '<p class="resultline" id="vres"></p><div class="grid" id="vgrid"></div>'
+    + '<p class="empty" id="vempty" hidden>' + T.nothing + "</p></div>";
+}
+
+function renderValue(){
+  const q = vState.q.trim().toLowerCase();
+  let list = PRICELIST.filter(p => {
+    const u = byName[p.name];
+    if(vState.rar.size && !vState.rar.has(u.rarity)) return false;
+    if(vState.onlyPriced && p.valueKind == null) return false;
+    if(q && p.name.toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  });
+  const s = vState.sort;
+  list = list.slice().sort((a, b) => {
+    if(s === "name") return a.name.localeCompare(b.name, "en");
+    if(s === "demand"){
+      const av = a.demandNum == null ? -1 : a.demandNum, bv = b.demandNum == null ? -1 : b.demandNum;
+      return bv - av;
+    }
+    const av = a.valueNum == null ? -1 : a.valueNum, bv = b.valueNum == null ? -1 : b.valueNum;
+    return bv - av;
+  });
+  document.getElementById("vgrid").innerHTML = list.map(valueCard).join("");
+  document.getElementById("vempty").hidden = list.length > 0;
+  document.getElementById("vres").textContent = T.shown(list.length, PRICELIST.length);
+}
+
+function bindValue(){
+  document.getElementById("vq").addEventListener("input", e => { vState.q = e.target.value; renderValue(); });
+  const sortSel = document.getElementById("vsort");
+  sortSel.value = vState.sort;
+  sortSel.addEventListener("change", e => { vState.sort = e.target.value; renderValue(); });
+  document.getElementById("vrar").addEventListener("click", e => toggleChip(e, vState.rar, "r", renderValue));
+  document.getElementById("vonly").addEventListener("click", e => {
+    vState.onlyPriced = !vState.onlyPriced;
+    e.currentTarget.setAttribute("aria-pressed", String(vState.onlyPriced));
+    renderValue();
+  });
 }
 
 /* ========== РОУТЕР ========== */
@@ -914,6 +1010,7 @@ function chrome(){
   document.getElementById("n-crates").textContent = BOXES.length;
   document.getElementById("n-modes").textContent = MODES.length;
   document.getElementById("n-crafts").textContent = RECIPES.length + ITEMS.length;
+  document.getElementById("n-value").textContent = PRICELIST.filter(p => p.valueKind != null).length;
   document.querySelectorAll("#langswitch button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.lang === LANG)));
 
@@ -939,7 +1036,7 @@ function route(keepScroll){
   else if(parts[0] === "crates"){ app.innerHTML = cratesView(); renderCrates(); bindCrates(); tab = "crates"; }
   else if(parts[0] === "modes"){ app.innerHTML = modesView(); renderModes(); bindModes(); tab = "modes"; }
   else if(parts[0] === "crafts"){ app.innerHTML = craftsView(); renderCrafts(); bindCrafts(); tab = "crafts"; }
-  else if(parts[0] === "value"){ app.innerHTML = valueView(); tab = "value"; }
+  else if(parts[0] === "value"){ app.innerHTML = valueView(); renderValue(); bindValue(); tab = "value"; }
   else { app.innerHTML = unitsView(); renderUnits(); bindUnits(); }
   document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("on", a.dataset.v === tab));
   if(!keepScroll) window.scrollTo({ top: 0, behavior: "instant" });
@@ -951,17 +1048,17 @@ function bindUnits(){
   const sortSel = document.getElementById("usort");
   sortSel.value = uState.sort;
   sortSel.addEventListener("change", e => { uState.sort = e.target.value; renderUnits(); });
-  document.getElementById("utier").addEventListener("click", e => toggleChip(e, uState.tier, "t"));
-  document.getElementById("urar").addEventListener("click", e => toggleChip(e, uState.rar, "r"));
+  document.getElementById("utier").addEventListener("click", e => toggleChip(e, uState.tier, "t", renderUnits));
+  document.getElementById("urar").addEventListener("click", e => toggleChip(e, uState.rar, "r", renderUnits));
 }
 
-function toggleChip(e, set, key){
+function toggleChip(e, set, key, renderFn){
   const b = e.target.closest(".chip");
   if(!b) return;
   const v = b.dataset[key];
   if(set.has(v)){ set.delete(v); b.setAttribute("aria-pressed", "false"); }
   else { set.add(v); b.setAttribute("aria-pressed", "true"); }
-  renderUnits();
+  (renderFn || renderUnits)();
 }
 
 function bindCrates(){
