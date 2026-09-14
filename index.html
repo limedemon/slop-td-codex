@@ -337,7 +337,7 @@ const I18N = {
     tagMerchant: "у мерчанта", unavailable: "пока недоступен",
     kSource: "Как получить", shopPrice: "Цена в магазине",
     tabValue: "Прайслист", valueSoon: "Скоро!..",
-    valueNote: "Ручной прайслист сообщества, не данные из самой игры — цены и спрос могут отличаться от реальных сделок. У части юнитов данных пока нет.",
+    valueNote: "Ручной прайслист сообщества, не данные из самой игры — цены и спрос могут отличаться от реальных сделок. Цены указаны в слопбаксах (Slopbux), это не игровые деньги за установку. У части юнитов данных пока нет.",
     valueSortValue: "По цене", valueSortDemand: "По спросу", valueOnlyPriced: "Только с ценой",
     valueDemandLabel: "Спрос", naText: "N/A",
     stab: { stable: "Стабильна", rising: "Растёт", slow_rising: "Медленно растёт", falling: "Падает",
@@ -379,7 +379,7 @@ const I18N = {
     footnote: "Early, mid and endgame are split by placement price: up to 700, up to 2500, and above. Values match the current version of the game and may change with updates.",
     tabUnits: "Units", tabCrates: "Crates", tabModes: "Matches", tabCrafts: "Crafts",
     tabValue: "Value List", valueSoon: "Soon!..",
-    valueNote: "A hand-kept community price list, not data pulled from the game itself — prices and demand may differ from real trades. Some units have no data yet.",
+    valueNote: "A hand-kept community price list, not data pulled from the game itself — prices and demand may differ from real trades. Values are in Slopbux, not the in-game placement currency. Some units have no data yet.",
     valueSortValue: "By value", valueSortDemand: "By demand", valueOnlyPriced: "Priced only",
     valueDemandLabel: "Demand", naText: "N/A",
     stab: { stable: "Stable", rising: "Rising", slow_rising: "Slowly rising", falling: "Falling",
@@ -920,8 +920,9 @@ function stabInfo(key){
 }
 
 function valuePriceHtml(p){
-  if(p.valueKind === "num") return CASH + "<span>" + fmt2(p.valueNum) + "</span>";
-  if(p.valueKind === "range") return CASH + "<span>" + fmt2(p.valueRange[0]) + "\u2013" + fmt2(p.valueRange[1]) + "</span>";
+  const sb = curIcon("Slopbux");
+  if(p.valueKind === "num") return sb + "<span>" + fmt2(p.valueNum) + "</span>";
+  if(p.valueKind === "range") return sb + "<span>" + fmt2(p.valueRange[0]) + "\u2013" + fmt2(p.valueRange[1]) + "</span>";
   if(p.valueKind === "oc") return '<span style="color:var(--accent);font-weight:600">O/C</span>';
   return '<span style="color:var(--muted)">' + T.naText + "</span>";
 }
